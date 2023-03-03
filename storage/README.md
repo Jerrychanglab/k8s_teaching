@@ -8,4 +8,4 @@
 #### 說明:
 如要掛載NFS需採用PersistentVolumes + PersistentVolumesClaims達成此目標。
 ##### PersistentVolumes: 簡稱PV，在NFS Server那挖空間出來。
-##### PersistentVolumesClaims: 簡稱PVC，將PV挖出的空間透過PVC綁定放給Pod掛載。
+##### PersistentVolumesClaims: 簡稱PVC，將PV挖出的空間透過PVC邏輯層，綁定放給Pod掛載。
