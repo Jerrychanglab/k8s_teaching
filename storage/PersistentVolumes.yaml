@@ -11,5 +11,5 @@ spec:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Recycle
   nfs:
-    server: <NFS Server IP>
-    path: "<File Path>"
+    server: <nfs server ip>
+    path: "<file path>"

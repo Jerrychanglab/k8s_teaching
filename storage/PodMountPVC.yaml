@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: podmountpvc
+  name: podmountpvc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: podmountpvc
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: podmountpvc
+    spec:
+      containers:
+      - image: nginx:1.14
+        name: nginx
+        volumeMounts:
+        - name: <tag name>
+          mountPath: /usr/share/nginx/html
+      volumes:
+      - name: <tag name>
+        persistentVolumeClaim:
+         claimName: <pvc name>
