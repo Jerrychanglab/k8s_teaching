@@ -4,3 +4,4 @@
 ### HostPath.yaml
 #### 說明:
 使用Deployment建置，讓Pod能使用到Work Node的空間共享。
+### .yaml
