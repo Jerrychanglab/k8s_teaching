@@ -21,9 +21,9 @@ spec:
       - image: nginx:1.14
         name: nginx
         volumeMounts:
-        - name: <tag name>
+        - name: <volume name>
           mountPath: /usr/share/nginx/html
       volumes:
-      - name: <tag name>
+      - name: <volume name>
         persistentVolumeClaim:
          claimName: <pvc name>

@@ -22,10 +22,10 @@ spec:
         name: busybox
         command: ["sh", "-c", "while true; do echo $(hostname) $(date) >> /var/log/index.html; sleep 10; done"]
         volumeMounts:
-        - name: <tag name>
+        - name: <volume name>
           mountPath: /var/log
       volumes:
-      - name: <tag name>
+      - name: <volume name>
         hostPath:
          path: /root/jarry
          type: Directory
