@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: hostpath
+  name: hostpath
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hostpath
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: hostpath
+    spec:
+      containers:
+      - image: nginx:1.14
+        name: nginx
+        volumeMounts:
+        - name: <tag name>
+          mountPath: /usr/share/nginx/html
+      volumes:
+      - name: <tag name>
+        hostPath:
+         path: /root/jarry
+         type: Directory
