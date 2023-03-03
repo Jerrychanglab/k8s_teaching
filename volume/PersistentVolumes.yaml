@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv
+  labels:
+    nfs: <tag name>
+spec:
+  capacity:
+    storage: 2G
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Recycle
+  nfs:
+    server: <NFS Server IP>
+    path: "<file Path>"
