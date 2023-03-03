@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: emptydir
+  name: emptydir
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: emptydir
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: emptydir
+    spec:
+      containers:
+      - image: nginx:1.14
+        name: nginx
+        volumeMounts:
+        - name: <volume name>
+          mountPath: /usr/share/nginx/html
+      - image: busybox
+        name: busybox
+        command: ["sh", "-c", "while true; do echo $(hostname) $(date) >> /var/log/index.html; sleep 10; done"]
+        volumeMounts:
+        - name: <volume name>
+          mountPath: /var/log
+      volumes:
+      - name: <volume name>
+        emptyDir: {}
