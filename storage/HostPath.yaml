@@ -18,11 +18,12 @@ spec:
         app: hostpath
     spec:
       containers:
-      - image: nginx:1.14
-        name: nginx
+      - image: busybox
+        name: busybox
+        command: ["sh", "-c", "while true; do echo $(hostname) $(date) >> /var/log/index.html; sleep 10; done"]
         volumeMounts:
         - name: <tag name>
-          mountPath: /usr/share/nginx/html
+          mountPath: /var/log
       volumes:
       - name: <tag name>
         hostPath:
