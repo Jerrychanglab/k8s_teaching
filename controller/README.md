@@ -32,4 +32,7 @@
     kubectl delete deployments.apps <deployment name>
 ## DaemonSet (進程守護)
 ![image](https://user-images.githubusercontent.com/39659664/223023844-79d31c33-fb8c-429d-a335-58c087171f9d.png)
-### 說明:用途:確保所有Node上都運行一個Pod，當有新的Node加入時，Pod也會自動生成在上面。
+### 說明:確保所有Node上都運行一個Pod，當有新的Node加入時，Pod也會自動生成在上面。
+#### 新增方式 (無法dry-run建置)
+    kubectl create deployment <daemonset name> --image=<套件> --dry-run -o yaml | sed '/null\|{}\|replicas/d;/status/,$d;s/Deployment/DaemonSet/g' > <daemonset name>.yaml
+> 透過Deployment的dry-run來進行修改。
