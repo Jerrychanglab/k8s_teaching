@@ -10,6 +10,12 @@
 ## Taints (污點)
 ### 說明:如此Node上不想要有Pod服務時，可透過Taits來達成。
 #### 操作指令
-    kubectl taint node k8s-worker01 <key>=<value>:<策略>
-> 策略NoSchedule:如此Node已有Pod存在，不會將其趕走 / NoExecute:如此Pod有Node會將Pod趕走，兩種選擇 
+    kubectl taint node <work node> <key>=<value>:<策略>
+> 策略NoSchedule:如此Node已有Pod存在，不會將其趕走 / NoExecute:如此Pod有Node會將Pod趕走，兩種選擇
+#### 修改指令
+    kubectl taint node <work node> <key>=<value>:<策略> --overwrite
+#### 移除指令
+    kubectl taint node <work node> <key>-
+#### 查看指令
+    kubectl describe nodes <work node> | grep Taints
 ## Tolerations (反向污點)
