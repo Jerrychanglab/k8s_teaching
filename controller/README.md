@@ -53,4 +53,5 @@ kubectl apply -f <job name>.yaml
     kubectl apply -f <cronjob>.yaml
 ##### 查詢方式
     kubectl get cronjobs
-> 執行次數可看Active欄位
+##### 移除方式
+    kubectl delete cronjobs <CronJob Name>
