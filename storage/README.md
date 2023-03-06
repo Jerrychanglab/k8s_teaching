@@ -3,6 +3,7 @@
 #### 說明:
 讓Pod內的Containers使用共用資料空間。(範例:Pod內的containers，分別是:nginx與busybox)
 ### [ HostPath ]
+![image](https://user-images.githubusercontent.com/39659664/223010500-437057b0-c669-439a-80ff-045cdf429e1d.png)
 #### 說明:
 讓Pod能使用Work Node(本機)空間。
 ### [ Persistent ]
