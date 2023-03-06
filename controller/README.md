@@ -19,6 +19,7 @@
 ##### 新增方式 (透過dry-run=Client)
     kubectl create deployment <deploymet name> --image=<套件>:<版本> --replicas=<副本數> --dry-run=client -o yaml > <deployment name>.yaml
     kubectl apply -f <deployment name>.yaml
+![image](https://user-images.githubusercontent.com/39659664/223052474-2f963262-a9e7-4fe2-ab53-a0d2446c8866.png)
 ##### 副本數調整
     kubectl scale deployment <deployment name> --replicas <數量>
 ##### Image升級
