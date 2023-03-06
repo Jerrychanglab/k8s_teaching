@@ -13,4 +13,4 @@
 ##### 1.準備NFS Server
 ##### 2.PV建置，並向NFS Server挖取空間
 ##### 3.PVC與PV邏輯層綁定
-##### 4.Container與PVC綁定。
+##### 4.Pod內的Container與PVC綁定。
