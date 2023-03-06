@@ -27,3 +27,7 @@
 ![image](https://user-images.githubusercontent.com/39659664/223074198-17a099b9-4938-4012-9d2e-3f4c35a538d8.png)
 > 可看目前Work Node01已有配置Taints key=sz value=dep
 ![image](https://user-images.githubusercontent.com/39659664/223075223-30fc6f97-29f0-4803-9cf4-8d0a51a24d17.png)s
+## Cordoning (軟隔離)
+### 說明:Node軟性維護，既有的Pod不會遷移，新的Pod部會部署在此Node
+## Drain (應隔離)
+### 說明:Node強制維護，會將上面的Pod全數驅離。
