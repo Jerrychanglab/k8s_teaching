@@ -31,4 +31,5 @@
 ##### 移除方式
     kubectl delete deployments.apps <deployment name>
 ## DaemonSet (進程守護)
+![image](https://user-images.githubusercontent.com/39659664/223023844-79d31c33-fb8c-429d-a335-58c087171f9d.png)
 ### 說明:用途:確保所有Node上都運行一個Pod，當有新的Node加入時，Pod也會自動生成在上面。
