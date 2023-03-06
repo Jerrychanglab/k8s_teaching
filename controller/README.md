@@ -30,3 +30,5 @@
 > 備註:產生新的版本，在同步新增一個ReplicaSet，此ReplicaSet紀錄Pod的組態，如被移除，會無法退版。
 ##### 移除方式
     kubectl delete deployments.apps <deployment name>
+## DaemonSet (進程守護)
+### 說明:用途:確保所有Node上都運行一個Pod，當有新的Node加入時，Pod也會自動生成在上面。
