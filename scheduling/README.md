@@ -23,5 +23,7 @@
 ![image](https://user-images.githubusercontent.com/39659664/223073507-ccc3346d-80e5-494c-80fa-387712206032.png)
 > 上圖描述，Pod設定tolerations，key/value有對應與無對應差別
 ### 說明:當今天Node上有Taints存在時，但Pod想在此Node上面部署時。
-
-
+##### 操作指令
+![image](https://user-images.githubusercontent.com/39659664/223074198-17a099b9-4938-4012-9d2e-3f4c35a538d8.png)
+> 可看目前Work Node01已有配置Taints key=sz value=dep
+![image](https://user-images.githubusercontent.com/39659664/223075223-30fc6f97-29f0-4803-9cf4-8d0a51a24d17.png)s
