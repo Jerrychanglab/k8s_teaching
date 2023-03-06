@@ -22,6 +22,7 @@ spec:
         name: busybox
         command: ["sh", "-c", "while true; do echo $(hostname) $(date) >> /var/log/index.html; sleep 10; done"]
         volumeMounts:
+          #�修改
         - name: <volume name>
           mountPath: /var/log
       volumes:
