@@ -30,7 +30,9 @@
     kubectl rollout undo deployment <deployment name> --to-revision=<號碼> //退版到要的版本號碼
 > 備註:產生新的版本，並同步新增一個ReplicaSet，此ReplicaSet紀錄Pod的組態，如被移除，會無法退版。
 ##### 移除方式
-    kubectl delete deployments.apps <deployment name>
+    kubectl delete deployments <deployment name>
+##### 重啟方式
+    kubectl rollout restart deployment <deployment name>
 ## DaemonSet (進程守護)
 ![image](https://user-images.githubusercontent.com/39659664/223023844-79d31c33-fb8c-429d-a335-58c087171f9d.png)
 ### 說明:確保所有Node上都運行一個Pod，當有新的Node加入時，Pod也會自動生成在上面。
