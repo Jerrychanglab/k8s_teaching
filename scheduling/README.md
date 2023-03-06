@@ -9,7 +9,7 @@
 ![image](https://user-images.githubusercontent.com/39659664/223050664-0792fa78-bcb2-4459-81ef-9354a7ecb786.png)
 ## Taints (污點)
 ![image](https://user-images.githubusercontent.com/39659664/223072610-9031e728-d73e-4dbd-a279-b3744eeabf9c.png)
-### 說明:如Node上有Taints時，Pod將無法部署在上面，除非有對應的Tolerations。
+### 說明:如Node上有Taints時，Pod將無法部署在上面，除非Pod有設定Tolerations，key與value需滿足Taints。
 #### 操作指令
     kubectl taint node <work node> <key>=<value>:<策略>
 > 策略NoSchedule:如此Node已有Pod存在，不會將其趕走 / NoExecute:如此Pod有Node會將Pod趕走，兩種選擇
