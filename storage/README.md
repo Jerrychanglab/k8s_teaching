@@ -7,6 +7,7 @@
 #### 說明:
 讓Pod能使用Work Node(本機)空間。
 ### [ Persistent ]
+![image](https://user-images.githubusercontent.com/39659664/223010972-6128aaf6-19a0-4a14-9e64-1fb0d55e47cb.png)
 #### 說明:
 Pod如要掛載NFS Server需採用PersistentVolumes + PersistentVolumesClaims達成此目標。
 ##### PersistentVolumes: 簡稱PV，在NFS Server挖空間出來。
