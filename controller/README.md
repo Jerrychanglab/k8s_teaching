@@ -25,8 +25,8 @@
     kubectl set image deployment/<deployment name> <套件>=<套件>:<版本>
 ##### 退版方式 (下方流程步驟)
     kubectl rollout history deployment <deployment name> //查看版本歷程
-    kubectl rollout history deployment <deployment name> --revision=1 //查看要退版的版本號碼
-    kubectl rollout undo deployment <deployment name> --to-revision=1 //退版到要的版本號碼
+    kubectl rollout history deployment <deployment name> --revision=<號碼> //查看要退版的版本號碼
+    kubectl rollout undo deployment <deployment name> --to-revision=<號碼> //退版到要的版本號碼
 > 備註:產生新的版本，並同步新增一個ReplicaSet，此ReplicaSet紀錄Pod的組態，如被移除，會無法退版。
 ##### 移除方式
     kubectl delete deployments.apps <deployment name>
