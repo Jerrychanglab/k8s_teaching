@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  creationTimestamp: null
+  name: cronjob
+spec:
+  jobTemplate:
+    metadata:
+      creationTimestamp: null
+      name: cronjob
+    spec:
+      template:
+        metadata:
+          creationTimestamp: null
+        spec:
+          containers:
+          - image: busybox:1.28
+            name: cronjob
+            command: ["echo", "Hello Jarry"]
+          restartPolicy: OnFailure
+  schedule: '*/1 * * * *'
