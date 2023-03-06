@@ -40,3 +40,10 @@
 ##### 查看方式
     kubectl get daemonsets -o wide
     kubectl get pod <pod name> -o wide //可查看是否pod都在每個Node上
+## Job (一次性任務)
+### 說明:執行一次性任務，可透過Job來達成
+##### 新增方式 (dry-run=client)
+kubectl create job <job name> --image=<images> --dry-run=client -o yaml > <Job name>.yaml
+kubectl apply -f <job name>.yaml
+## CronJob (排程任務)
+### 指定週期性執行任務時間，可透過CronJob達成
