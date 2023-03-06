@@ -12,3 +12,7 @@
     kubectl get <object> <pod name> --show-labels    
 ##### 篩選標籤
     kubectl get <object> --selector <key>=<value>
+## Deployment (部署策略)
+### 說明:自訂快速部署策略，並包括ReplicaSet(副本功能)。ReplicaSet功能是Pod的存活數量。
+##### 新增方式 (透過dry-run=Client)
+    kubectl create deployment <deploymet name> --image=<套件>:<版本> --replicas=<副本數> --dry-run=client -o yaml > <deployment name>.yaml
