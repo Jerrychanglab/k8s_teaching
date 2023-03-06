@@ -47,3 +47,10 @@ kubectl create job <job name> --image=<images> --dry-run=client -o yaml > <Job n
 kubectl apply -f <job name>.yaml
 ## CronJob (排程任務)
 ### 指定週期性執行任務時間，可透過CronJob達成
+##### 新增方式 (dry-run=client)
+    kubectl create cronjob cronjob --image=<images>  --schedule="* * * * *" --dry-run=client -o yaml > CronJob.yaml
+> schedule 在更改要執行的時間，標準Linux CronJob用法
+    kubectl apply -f <cronjob>.yaml
+##### 查詢方式
+    kubectl get cronjobs
+> 執行次數可看Active欄位
