@@ -50,6 +50,7 @@ kubectl apply -f <job name>.yaml
 ##### 新增方式 (dry-run=client)
     kubectl create cronjob cronjob --image=<images>  --schedule="* * * * *" --dry-run=client -o yaml > CronJob.yaml
     kubectl apply -f <cronjob>.yaml
+![image](https://user-images.githubusercontent.com/39659664/223049956-3e0d1445-cc93-4002-8eb3-f83848f37973.png)    
 > schedule 在更改要執行的時間，標準Linux CronJob用法
 ##### 查詢方式
     kubectl get cronjobs
