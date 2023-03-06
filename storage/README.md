@@ -10,5 +10,10 @@
 ![image](https://user-images.githubusercontent.com/39659664/223010972-6128aaf6-19a0-4a14-9e64-1fb0d55e47cb.png)
 #### 說明:
 Pod如要掛載NFS Server需採用PersistentVolumes + PersistentVolumesClaims達成此目標。
-##### PersistentVolumes: 簡稱PV，在NFS Server挖空間出來。
-##### PersistentVolumesClaims: 簡稱PVC，將PV挖出的空間透過PVC邏輯層，綁定放給Pod掛載。
+##### PersistentVolumes: 簡稱PV。
+##### PersistentVolumesClaims: 簡稱PVC。 
+#### 建置流程:
+1.準備NFS Server
+2.PV建置，並向NFS Server挖取空間
+3.PVC與PV邏輯層綁定
+4.Container與PVC綁定。
