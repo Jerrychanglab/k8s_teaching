@@ -20,5 +20,8 @@
 #### 查看指令
     kubectl describe nodes <work node> | grep Taints
 ## Tolerations (反向污點)
+![image](https://user-images.githubusercontent.com/39659664/223073507-ccc3346d-80e5-494c-80fa-387712206032.png)
+> 上圖描述，Pod設定tolerations，key/value有對應與無對應差別
 ### 說明:當今天Node上有Taints存在時，但Pod想在此Node上面部署時。
+
 
