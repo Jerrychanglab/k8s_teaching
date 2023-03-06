@@ -1,4 +1,5 @@
 ### [ EmptyDir ]
+![image](https://user-images.githubusercontent.com/39659664/223010027-1f7aa4a8-e881-45d9-870b-f185e85bc448.png)
 #### 說明:
 讓Pod內的Containers使用共用資料空間。(範例:Pod內的containers，分別是:nginx與busybox)
 ### [ HostPath ]
