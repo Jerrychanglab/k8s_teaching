@@ -1,4 +1,10 @@
 # Scheduling (調度)使用說明
+**章節** 
+- NodeSelector(節點選擇) 
+- Taints(污點)
+- Tolerations(反向污點)
+- Maintain(維護)
+
 ## NodeSelector (節點選擇)
 ![image](https://user-images.githubusercontent.com/39659664/223045866-6c756acc-0685-4c37-a041-79a631971308.png)
 ### 說明:Pod要在指定的Node上運行，須透過此方式。
