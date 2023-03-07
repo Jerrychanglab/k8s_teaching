@@ -7,10 +7,17 @@
 > 配置完後，在指定一台做Master Node
 * Master Node Assign
 * Work Node Join
-* NetWork overlay部署
+* NetWork Overlay部署
 * 驗證
 ### K8S元件說明
 ![image](https://user-images.githubusercontent.com/39659664/223367119-31500a4d-eb9e-45cb-9f45-43941792d6eb.png)
+* api server
+* etcd
+* scheduler
+* controller manager
+* kubelet
+* kube Proxy
+* Container Runtime
 ### Controller (控制)
 * Labels(標籤)
 * Deployment(部署策略)
