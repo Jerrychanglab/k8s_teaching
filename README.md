@@ -9,7 +9,7 @@
 * Work Node Join
 * NetWork Overlay部署
 * 驗證
-### K8S元件說明
+### K8S Introduction
 * API Server
 * etcd
 * Scheduler
