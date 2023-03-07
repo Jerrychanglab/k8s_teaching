@@ -5,7 +5,7 @@
 > 此安裝使用Centos 8
 * Node環境安裝與配置
 > 配置完後，在指定一台做Master Node
-* Master Node assign
+* Master Node Assign
 * Work Node Join
 * NetWork overlay部署
 * 驗證
