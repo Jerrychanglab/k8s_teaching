@@ -1,6 +1,6 @@
 # K8S Insatall (Centos 8)
 撰寫人員:Jerry_chang
-##此LAB架構，需部三台Node，並指定一台Master，與一台NFS Server做後續的掛載運用。
+## 此LAB架構，需部三台Node，並指定一台Master，與一台NFS Server做後續的掛載運用。
 ![image](https://user-images.githubusercontent.com/39659664/223370763-2a83de9d-6ba0-4ae0-af0c-3c79caca4058.png)
 
 ## 流程一: 建置三台 Centos8 並定義名稱與IP
