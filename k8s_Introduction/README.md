@@ -11,9 +11,9 @@
 * 擴展性和插件: 提供擴展API插件機制，可以方便位k8s添加自訂義的功能。
 ### [ etcd ]
 #### etcd在kubernetes是用於儲存集群整個狀態，包括運行中的節點、容器、服務、儲存...等)，每當集群狀態發生變化時，etcd會自動更新訊息，並將訊息發送到所有的節點。
-### Scheduler
-### Controller Manager
-## [ Work Node ]
-### kubelet
-### kube Proxy
-### Container Runtime
+### [ Scheduler ]
+### [ Controller Manager ]
+## Work Node
+### [ kubelet ]
+### [ kube Proxy ]
+### [ Container Runtime ]
