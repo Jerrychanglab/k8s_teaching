@@ -1,5 +1,5 @@
 # K8S Insatall (Centos 8)
-撰寫人員:Jarry_chang
+撰寫人員:Jrry_chang
 ## 流程一: 建置三台 Centos8 並定義名稱與IP
 ### [ 下載Centos8 ]
     http://mirror01.idc.hinet.net/centos/8-stream/isos/x86_64/CentOS-Stream-8-x86_64-20230125-boot.iso
