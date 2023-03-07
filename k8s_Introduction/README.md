@@ -7,8 +7,8 @@
 * 提供API: 提供Restful API，讓用戶可使用Kubectl、Dashboard來管理集群的應用程序與服務對像等等。
 * 權限驗證: 權限驗證，確保授權只有在此用戶能進行訪問操作集群。
 * 管理etcd儲存: 與etcd儲存通信，將所有k8s集群訊息的狀態訊息儲存在etcd中，並提供對etcd儲存的管理監控功能。
-* 控制器管理:
-* 擴展性和插件:
+* 控制器管理: 提供內置的控制器(如:ReplicaSet、Deploument...等)來管理應用程序狀態，並按照用戶的配置維持期望狀態。
+* 擴展性和插件: 提供擴展API插件機制，可以方便位k8s添加自訂義的功能。
 ### etcd
 ### Scheduler
 ### Controller Manager
