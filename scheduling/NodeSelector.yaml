@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: nodeselector
+  name: nodeselector
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nodeselector
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: nodeselector
+    spec:
+      containers:
+      - image: nginx:1.14
+        name: nginx
+      nodeSelector:
+        disk: ssd

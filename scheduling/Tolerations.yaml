@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: tolerations
+  name: tolerations
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: tolerations
+  template:
+    metadata:
+      labels:
+        app: tolerations
+    spec:
+      containers:
+      - image: nginx:1.14
+        name: nginx
+      tolerations:
+      - key: "sz"
+        value: "dep"
+        effect: "NoSchedule"
+        operator: "Equal"
