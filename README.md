@@ -10,11 +10,10 @@
 * NetWork Overlay部署
 * 驗證
 ### K8S元件說明
-![image](https://user-images.githubusercontent.com/39659664/223367119-31500a4d-eb9e-45cb-9f45-43941792d6eb.png)
-* api server
+* API Server
 * etcd
-* scheduler
-* controller manager
+* Scheduler
+* Controller Manager
 * kubelet
 * kube Proxy
 * Container Runtime
