@@ -15,4 +15,7 @@
 * Tolerations(反污點)
 * Maintain(維護)
 ### Storage (儲存)
+* EmptyDir(暫時儲存空間)
+* HostPath(本機掛載空間)
+* PV + PVC(NFS掛載)
 ### Network (網路)
