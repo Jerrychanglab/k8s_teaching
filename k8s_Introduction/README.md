@@ -12,13 +12,10 @@
 ### [ etcd ]
 #### etcd在kubernetes是用於儲存集群整個狀態，包括運行中的節點、容器、服務、儲存...等)，每當集群狀態發生變化時，etcd會自動更新訊息，並將訊息發送到所有的節點。
 ### [ Scheduler ]
-#### Scheduler在Kubernetes是一個重要組件，用途在未指派Node上的Pod調度在Node上。
-#### 主要用途
-* 選擇節點: Scheduler根據Pod的策略需求(如:NodeSelector / tains / Tolerations)以及Node的可用狀況進行分配Pod部署在符合的節點上。
-* 負載均衡: Scheduler在選擇Node時，會考量Node的負載狀況，讓Pod均衡的部署在Node上。
-* 彈性伸縮: Scheduler在檢測到有Node異常時，會自動重新調度已經部署的Pod，確保高可用。
+#### scheduler是kubernetes集群的控制平面组件之一，用于將未指定Node的Pod調度到kubernetes集群中的Node上。當scheduler發現新的Pod创建請求時，會根據Pod的調度要求選擇最優的節點，並將該信息存储到etcd中。
 ### [ Controller Manager ]
 ## Work Node
 ### [ kubelet ]
+#### kubelet是kubernetes的一個重要組件，負責管理每個Node上的生命週期，確保Pod在Node上的運行狀態保持一致，當kubelet接收到kube-apiserver發送的建置Pod請求時，會負責建置Pod。
 ### [ kube Proxy ]
 ### [ Container Runtime ]
