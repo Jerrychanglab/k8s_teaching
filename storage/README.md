@@ -51,3 +51,5 @@
 ##### 1.創建Secret.yaml
     echo -n '<passwd>' | base64
 > 使用Secret.yaml，文件內password後面的密碼需填寫base64的字元
+##### 2.建置Mysql，使用Secret加密機制
+> 使用PodSecrets.yaml
