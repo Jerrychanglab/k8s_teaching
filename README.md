@@ -32,4 +32,6 @@
 * EmptyDir(暫時儲存空間)
 * HostPath(本機掛載空間)
 * PV + PVC(NFS掛載)
+* ConfgMap
+* Secrets
 ### Network (網路)
