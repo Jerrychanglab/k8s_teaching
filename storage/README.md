@@ -36,7 +36,7 @@
 > 使用PodMountPVC.yaml，claimName需填寫pvc的name
 ### [ ConfigMap ]
 ![image](https://user-images.githubusercontent.com/39659664/223612473-5118e1c3-9ebc-4d84-9c97-b64f8dfbc0a9.png)
-#### 說明:創建一個環境參數與文件，讓有需要使用此內容的Container自行帶入使用。
+#### 說明:創建一個環境參數或文件，讓有需要使用此內容的Container自行帶入使用。
 #### 建置流程:
 ##### 1.創建configMap.yaml
 ![image](https://user-images.githubusercontent.com/39659664/223613431-dae72a3d-2b78-4ac5-94a1-b10001784d7f.png)
