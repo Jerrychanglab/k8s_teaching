@@ -41,4 +41,7 @@
 ##### 1.創建configMap.yaml
 ![image](https://user-images.githubusercontent.com/39659664/223613431-dae72a3d-2b78-4ac5-94a1-b10001784d7f.png)
 > 使用ConfigMap.yamls，範例用nginx的default.conf說明
+##### 2.掛載此環境參數或文件。
+![image](https://user-images.githubusercontent.com/39659664/223614311-985f364f-9eb9-411d-9471-63a424d38363.png)
+> 使用PodConfigMap.yaml，達成Containers呼叫configmap的參數或文件使用。
 ### [ Secrets ]
