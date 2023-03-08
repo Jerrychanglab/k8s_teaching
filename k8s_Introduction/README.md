@@ -13,4 +13,5 @@
 ### [ kubelet ]
 #### kubelet是kubernetes集群中每個Node的主要組件之一，負責管理該Node上的容器生命周期，確保Pod在節點上運行的狀態與期望狀態一致。當kubelet接收到從kube-apiserver發送的創建Pod 的請求時，會負責在該Node上創建與運行對應的Pod。
 ### [ kube Proxy ]
+#### kube proxy是kubernetes集群中每個Node的重要的组件之一，其主要作用是實現Service的負載均衡和服務發現，並支持Kubernetes内部組件的訪問。通过監聽kube-apiserver中Service的變化化，並更新節點上的iptables規則，以保證請求能够正確轉發到Service後端的Pod上。
 ### [ Container Runtime ]
