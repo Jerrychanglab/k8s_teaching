@@ -45,3 +45,5 @@
 ![image](https://user-images.githubusercontent.com/39659664/223614311-985f364f-9eb9-411d-9471-63a424d38363.png)
 > 使用PodConfigMap.yaml，達成Containers呼叫configmap的參數或文件使用。
 ### [ Secrets ]
+使用說明: 透過加密機制，將加密內容傳遞給Containers的環境變數使用。
+> 此範例透過Secrets加密，更改Mysql的登入密碼。
