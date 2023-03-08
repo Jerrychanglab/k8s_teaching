@@ -10,9 +10,9 @@
 ### [ Controller Manager ]
 #### controller manager是kubernetes集群的組件之一，用於運行一組控制器，以確保集群的狀態與期望狀態一致。當controller manager檢測到新的Pod創建請求時，會啟動相應的控制器，如:ReplicaSet、Deployment...等，以確保Pod被正確的創建與管理。
 ## Work Node
-### [ kubelet ]
+### [ Kubelet ]
 #### kubelet是kubernetes集群中的組件之一，負責管理該Node上的容器生命周期，確保Pod在節點上運行的狀態與期望狀態一致。當kubelet接收到從kube-apiserver發送的創建Pod 的請求時，會負責在該Node上創建與運行對應的Pod。
-### [ kube Proxy ]
+### [ Kube Proxy ]
 #### kube proxy是kubernetes集群中每個Node的重要的组件之一，其主要作用是實現Service的負載均衡和服務發現，並支持Kubernetes内部組件的訪問。通过監聽kube-apiserver中Service的變化化，並更新節點上的iptables規則，以保證請求能够正確轉發到Service後端的Pod上。
 ### [ Container Runtime ]
 #### Container Runtime是kubernetes集群中的组件之一，其主要作用是運行和管理容器，提供容器的隔離與安全性，支持容器鏡像的管理，並與Kubernetes容器编排系统進程集成，以便在 Kubernetes集群中管理和部署容器應用程序。在Kubernetes集群中，常用的Container Runtime包括 Docker、CRI-O、containerd 等。
