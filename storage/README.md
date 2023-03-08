@@ -34,4 +34,5 @@
 > 使用PersistentVolumesClaims.yaml，pvc的labels key:value需要與pv一致，並且與PV拿儲存空間。
 ##### 4.Pod內的Container與PVC綁定。
 > 使用PodMountPVC.yaml，claimName需填寫pvc的name
-
+### [ ConfigMap ]
+### [ Secrets ]
