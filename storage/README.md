@@ -47,3 +47,7 @@
 ### [ Secrets ]
 使用說明: 透過加密機制，將加密內容傳遞給Containers的環境變數使用。
 > 此範例透過Secrets加密，更改Mysql的登入密碼。
+#### 建置流程:
+##### 1.創建Secret.yaml
+    echo -n '<passwd>' | base64
+> 使用Secret.yaml，文件內password後面的密碼需填寫base64的字元
