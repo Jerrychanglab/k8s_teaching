@@ -1,4 +1,10 @@
 # Storage(儲存)使用説明
+### 章節
+* EmptyDir
+* HostPath
+* Persistent
+* ConfgMap
+* Secrets
 ## 在使用之前，先說明stoage儲存必須使用到的yaml格式內容。
 ![image](https://user-images.githubusercontent.com/39659664/223606158-7b30f3e7-efe5-4f57-863d-445c475df08c.png)
 #### 顏色框架意思說明
