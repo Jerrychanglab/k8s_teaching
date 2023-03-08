@@ -8,6 +8,7 @@
 ### [ Scheduler ]
 #### scheduler是kubernetes集群的控制平面组件之一，用于將未指定Node的Pod調度到kubernetes集群中的Node上。當scheduler發現新的Pod创建請求時，會根據Pod的調度要求選擇最優的節點，並將該信息存储到etcd中。
 ### [ Controller Manager ]
+#### controller manager是kubernetes集群的控制組件之一，用於運行一組控制器，以確保集群的狀態與期望狀態一致。當controller manager檢測到新的Pod創建請求時，會啟動相應的控制器，如:ReplicaSet、Deployment...等，以確保Pod被正確的創建與管理。
 ## Work Node
 ### [ kubelet ]
 #### kubelet是kubernetes的一個重要組件，負責管理每個Node上的生命週期，確保Pod在Node上的運行狀態保持一致，當kubelet接收到kube-apiserver發送的建置Pod請求時，會負責建置Pod。
