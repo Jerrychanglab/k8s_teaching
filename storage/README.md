@@ -18,12 +18,12 @@
 > 使用EmptDir.yaml，效果是一個Pod內的兩個Containers設定路徑建置軟連結，共同使用臨時空間，如Pod移除，此空間內的資料也會移除。
 ### [ HostPath ]
 ![image](https://user-images.githubusercontent.com/39659664/223010500-437057b0-c669-439a-80ff-045cdf429e1d.png)
-#### 說明:讓Pod能使用Work Node(本機)空間。
+#### 說明:讓Containers能使用Work Node(本機)空間。
 ![image](https://user-images.githubusercontent.com/39659664/223604858-7112fc3c-2441-4fe1-b72b-7ce675c8b037.png)
 > 使用HostPath.yaml，效果是Containers能使用work node上的路徑空間。如Pod移除，work node上的內容會保留。
 ### [ Persistent ]
 ![image](https://user-images.githubusercontent.com/39659664/223010972-6128aaf6-19a0-4a14-9e64-1fb0d55e47cb.png)
-#### 說明:讓Pod能使用NFS空間，需採用PersistentVolumes + PersistentVolumesClaims達成此目標。
+#### 說明:讓Containers能使用NFS空間，需採用PersistentVolumes + PersistentVolumesClaims達成此目標。
 ##### PersistentVolumes: 簡稱PV。
 ##### PersistentVolumesClaims: 簡稱PVC。 
 #### 建置流程:
@@ -35,4 +35,10 @@
 ##### 4.Pod內的Container與PVC綁定。
 > 使用PodMountPVC.yaml，claimName需填寫pvc的name
 ### [ ConfigMap ]
+![image](https://user-images.githubusercontent.com/39659664/223612473-5118e1c3-9ebc-4d84-9c97-b64f8dfbc0a9.png)
+#### 說明:創建一個環境參數與文件，讓有需要使用此內容的Container自行帶入使用。
+#### 建置流程:
+##### 1.創建configMap.yaml
+![image](https://user-images.githubusercontent.com/39659664/223613431-dae72a3d-2b78-4ac5-94a1-b10001784d7f.png)
+> 使用ConfigMap.yamls，範例用nginx的default.conf說明
 ### [ Secrets ]
