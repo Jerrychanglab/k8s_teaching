@@ -1,5 +1,6 @@
 # K8s 元件說明
 ![image](https://user-images.githubusercontent.com/39659664/223376662-c5933a61-178e-42e6-aa49-99907c86ec92.png)
+> 在說明各元件功能之前，要先認知K8s的最小單位是Pod，一個Pod可以多個container。
 ##  Master Node 
 ### [ Kube-apiserver ]
 #### kube-apiserver是kubernetes集群的组件之一，用於處理API請求，並將集群狀態儲存到etcd中。在部署Pod時，用户通過kubectl命令或其他客户端向kube-apiserver發送創建Pod的API請求。
