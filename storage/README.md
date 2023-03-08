@@ -3,7 +3,7 @@
 ![image](https://user-images.githubusercontent.com/39659664/223606158-7b30f3e7-efe5-4f57-863d-445c475df08c.png)
 #### 顏色框架意思說明
 * 紅色 -> 定義一個空間名稱。
-* 藍色 -> 給與此空間名稱，需跑什麼參數。(如:EmtyDir / HostPath...等)
+* 藍色 -> 給與此空間名稱，需跑什麼參數。(如:EmtyDir / HostPath / persistentVloumeClaim...等)
 * 橘色 -> 使用以定義的空間名稱，並指定conatiners內的哪個路徑要共用。
 ### [ EmptyDir ]
 ![image](https://user-images.githubusercontent.com/39659664/223010027-1f7aa4a8-e881-45d9-870b-f185e85bc448.png)
