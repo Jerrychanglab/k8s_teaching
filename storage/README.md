@@ -29,5 +29,9 @@
 #### 建置流程:
 ##### 1.準備NFS Server
 ##### 2.PV建置，並向NFS Server挖取空間
+> 使用PersistentVolumes.yaml並指定work node能溝通到的nfs ip與路徑，並且pv的labels key:value需與後續pvc一致。
 ##### 3.PVC與PV邏輯層綁定
+> 使用PersistentVolumesClaims.yaml，pvc的labels key:value需要與pv一致，並且與PV拿儲存空間。
 ##### 4.Pod內的Container與PVC綁定。
+> 使用PodMountPVC.yaml，claimName需填寫pvc的name
+
