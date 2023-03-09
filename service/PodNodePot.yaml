@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: podnodeport
+  name: podnodeport
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: podnodeport
+  template:
+    metadata:
+      labels:
+        app: podnodeport
+    spec:
+      containers:
+      - image: gcr.io/google-samples/hello-app:1.0
+        name: hello
