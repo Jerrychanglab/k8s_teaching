@@ -6,6 +6,7 @@
 * NodePort
 * SLB
 ## [ Cluster IP ]
-![image](https://user-images.githubusercontent.com/39659664/223943902-2ebc2704-8a6a-44f8-b40c-3218e63da1a1.png)
+![image](https://user-images.githubusercontent.com/39659664/223951242-60974232-ae7b-4b7b-9d4d-3029759f42d8.png)
 ### 說明: 提供k8s集群內的服務呼叫。
 > 備註:非此k8s的叢集內的服務，會無法呼叫到放出的VIP。
+> 
