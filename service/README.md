@@ -42,3 +42,11 @@
 > 透過指令綁定時，外部呼叫Port會隨機配發，範圍(30000-50000)
 #### 3.查看NodePort
     kubectl get svc
+![image](https://user-images.githubusercontent.com/39659664/223974411-e30e5a01-4a50-41e9-9d4a-90853c20a097.png)
+#### 4.驗證方式
+##### 呼叫內部IP:Port 
+![image](https://user-images.githubusercontent.com/39659664/223974875-80100bb8-d897-4bb9-8d3c-061917aff007.png)
+> 內部Port，需呼叫Cluster IP
+##### 呼叫外部IP:Port
+![image](https://user-images.githubusercontent.com/39659664/223975585-04c966b8-cd54-472a-9437-b273d2e321e6.png)
+> 外部Port，需呼叫Node IP。
