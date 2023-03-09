@@ -22,4 +22,6 @@
     kubectl get svc
 ![image](https://user-images.githubusercontent.com/39659664/223956134-caff6f0b-6fb6-4ccf-bee1-8906539ca1fd.png)
 > 可看到cluster ip 有一個VIP，與設定的放出的服務Port
-#### 4.驗證
+#### 4.驗證方式
+    curl <cluster ip>:<port>
+![image](https://user-images.githubusercontent.com/39659664/223956662-7cf82714-e868-42fa-83ce-a869ac199e4f.png)
