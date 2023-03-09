@@ -40,3 +40,5 @@
 ##### 方法二: 透過指令綁定Deployment
     kubectl expose deployment <Deployment Name> --type=NodePort --Port=<Internal Service Port> --target-port=<Pod Port>
 > 透過指令綁定時，外部呼叫Port會隨機配發，範圍(30000-50000)
+#### 3.查看NodePort
+    kubectl get svc
