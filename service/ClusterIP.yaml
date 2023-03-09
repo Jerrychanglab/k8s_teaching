@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: clusterip
+  name: clusterip
+spec:
+  ports:
+  - protocol: TCP
+    port: <service Port>
+    targetPort: <Pod Port>
+  selector:
+    app: <Deployment Name>
+  type: ClusterIP
