@@ -4,7 +4,7 @@
 #### 章節
 * Cluster IP
 * NodePort
-* SLB
+* LoadBalancer
 ## [ Cluster IP ] (內部服務使用)
 ![image](https://user-images.githubusercontent.com/39659664/223951242-60974232-ae7b-4b7b-9d4d-3029759f42d8.png)
 ### 說明: 提供k8s集群內的服務呼叫。
