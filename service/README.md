@@ -10,11 +10,16 @@
 ### 說明: 提供k8s集群內的服務呼叫。
 > 備註:非此k8s的叢集內的服務，會無法呼叫到放出的VIP。
 ### 操作介紹
-##### 1.使用PodClusterIP.yaml建立服務出來。
+#### 1.使用PodClusterIP.yaml建立服務出來。
 > 此Pod image採用google-samples的hello來展示。
-##### 2.創建Service的Cluster IP Modes
+#### 2.創建Service的Cluster IP Modes
 > 可透過Yaml建置，也可透過指令。
 ##### 方法一: 透過Yaml建置，可看ClusterIP.yaml
 ![image](https://user-images.githubusercontent.com/39659664/223954782-57fa0c41-d5b5-4583-bbb8-4d6bb7c626ad.png)
 ##### 方法二: 透過指令綁定Deployment
     kubectl expose deployment <Deployment Name> --type=ClusterIP --port=<Service Port> --target-port=<Pod Port>
+#### 3.查看放出的Cluster IP
+    kubectl get svc
+![image](https://user-images.githubusercontent.com/39659664/223956134-caff6f0b-6fb6-4ccf-bee1-8906539ca1fd.png)
+> 可看到cluster ip 有一個VIP，與設定的放出的服務Port
+#### 4.驗證
