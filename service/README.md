@@ -35,3 +35,5 @@
 > 此Pod image採用google-samples的hello來展示。
 #### 2.創建Service的NodePort模式
 ##### 方法一: 透過Yaml建置，可看NodePort.yaml
+![image](https://user-images.githubusercontent.com/39659664/223970705-0d6ded9a-50ef-484e-b496-88458aa91457.png)
+> 透過yaml創建時，能
