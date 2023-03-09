@@ -25,3 +25,4 @@
 #### 4.驗證方式
     curl <cluster ip>:<port>
 ![image](https://user-images.githubusercontent.com/39659664/223956662-7cf82714-e868-42fa-83ce-a869ac199e4f.png)
+> 可看到呼叫VIP時會平均的分配底下的Pod服務。
