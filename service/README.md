@@ -26,3 +26,7 @@
     curl <cluster ip>:<port>
 ![image](https://user-images.githubusercontent.com/39659664/223956662-7cf82714-e868-42fa-83ce-a869ac199e4f.png)
 > 可看到呼叫VIP時會平均的分配底下的Pod服務。
+## [ NodePort ]
+![image](https://user-images.githubusercontent.com/39659664/223964974-70c8b825-7664-41bf-bb4e-81015683f51d.png)
+### 說明: 將每個Node的IP都變成是服務入口，並會配一個Port提供服務使用。
+> 此模式，只要服務能與Node IP溝通到，就可以連線此服務。
