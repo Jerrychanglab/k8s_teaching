@@ -23,7 +23,7 @@
 ![image](https://user-images.githubusercontent.com/39659664/223956134-caff6f0b-6fb6-4ccf-bee1-8906539ca1fd.png)
 > 可看到cluster ip 有一個VIP，與設定的放出的服務Port
 #### 4.驗證方式
-    curl <cluster ip>:<port>
+    curl http://<cluster ip>:<port>
 ![image](https://user-images.githubusercontent.com/39659664/223956662-7cf82714-e868-42fa-83ce-a869ac199e4f.png)
 > 可看到呼叫VIP時會平均的分配底下的Pod服務。
 ## [ NodePort ] (內/外部服務使用)
@@ -45,9 +45,11 @@
 ![image](https://user-images.githubusercontent.com/39659664/223974411-e30e5a01-4a50-41e9-9d4a-90853c20a097.png)
 #### 4.驗證方式
 ##### 呼叫內部IP:Port 
+    curl http://<cluster ip>:<內部Port>
 ![image](https://user-images.githubusercontent.com/39659664/223974875-80100bb8-d897-4bb9-8d3c-061917aff007.png)
 > 內部Port，需呼叫Cluster IP
 ##### 呼叫外部IP:Port
+    curl http://<node ip>:<外部Port>
 ![image](https://user-images.githubusercontent.com/39659664/223975585-04c966b8-cd54-472a-9437-b273d2e321e6.png)
 > 外部Port，需呼叫Node IP
 ## [ LoadBalancer ] (雲上SLB)
