@@ -12,7 +12,7 @@
 ### 操作介紹
 #### 1.使用PodClusterIP.yaml建立服務出來。
 > 此Pod image採用google-samples的hello來展示。
-#### 2.創建Service的Cluster IP Modes
+#### 2.創建Service的Cluster IP模式
 > 可透過Yaml建置，也可透過指令。
 ##### 方法一: 透過Yaml建置，可看ClusterIP.yaml
 ![image](https://user-images.githubusercontent.com/39659664/223954782-57fa0c41-d5b5-4583-bbb8-4d6bb7c626ad.png)
@@ -30,3 +30,8 @@
 ![image](https://user-images.githubusercontent.com/39659664/223967264-5f4b3145-12c0-45ef-bddc-4eabec5d02d5.png)
 ### 說明: 將每個Node的IP都變成是服務入口，並會配一個Port提供服務使用。
 > 此模式，只要服務能與Node IP溝通到，就可以連線此服務。
+### 操作介紹
+#### 1.使用PodNodePort.yaml建立服務出來。
+> 此Pod image採用google-samples的hello來展示。
+#### 2.創建Service的NodePort模式
+##### 方法一: 透過Yaml建置，可看NodePort.yaml
