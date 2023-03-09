@@ -5,7 +5,7 @@
 * Cluster IP
 * NodePort
 * SLB
-## [ Cluster IP ]
+## [ Cluster IP ] (內部服務使用)
 ![image](https://user-images.githubusercontent.com/39659664/223951242-60974232-ae7b-4b7b-9d4d-3029759f42d8.png)
 ### 說明: 提供k8s集群內的服務呼叫。
 > 備註:非此k8s的叢集內的服務，會無法呼叫到放出的VIP。
@@ -26,7 +26,7 @@
     curl <cluster ip>:<port>
 ![image](https://user-images.githubusercontent.com/39659664/223956662-7cf82714-e868-42fa-83ce-a869ac199e4f.png)
 > 可看到呼叫VIP時會平均的分配底下的Pod服務。
-## [ NodePort ]
+## [ NodePort ] (內/外部服務使用)
 ![image](https://user-images.githubusercontent.com/39659664/223967264-5f4b3145-12c0-45ef-bddc-4eabec5d02d5.png)
 ### 說明: 將每個Node的IP都變成是服務入口，並會配一個Port提供服務使用。
 > 此模式，只要服務能與Node IP溝通到，就可以連線此服務。
@@ -49,4 +49,5 @@
 > 內部Port，需呼叫Cluster IP
 ##### 呼叫外部IP:Port
 ![image](https://user-images.githubusercontent.com/39659664/223975585-04c966b8-cd54-472a-9437-b273d2e321e6.png)
-> 外部Port，需呼叫Node IP。
+> 外部Port，需呼叫Node IP
+## [ LoadBalancer ] (雲上SLB)
