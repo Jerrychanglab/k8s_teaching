@@ -34,7 +34,7 @@
 * PV + PVC(NFS掛載)
 * ConfgMap(環境變數-非機密)
 * Secrets(環境變數-機密)
-### Service - 持續撰寫中，完成後會告知。 
+### Service (服務負載平衡) 
 * Cluster IP
 * NodePort
 * LoadBalancer
