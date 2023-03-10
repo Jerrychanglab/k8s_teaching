@@ -1,4 +1,4 @@
-# Kubernetes教學
+# Kubernetes(k8s)初階課程
 ## 大綱
 ### Kubernetes Install (安裝)
 * Linux準備3台
