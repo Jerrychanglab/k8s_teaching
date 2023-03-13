@@ -1,4 +1,6 @@
-# Kubernetes資源分配
+# Kubernetes資源
+* 資源概念(CPU/RAM)
+* Pod AutoScaling
 ## 資源概論(CPU/RAM)
 ![image](https://user-images.githubusercontent.com/39659664/224649798-1442e483-7f14-49a0-8692-be66d845cd00.png)
 ### CPU說明: Kubernetes中的CPU資源是用核心的單位來計算的，每顆CPU會被切割1000個mCPU，因此在Pod內的Containers要分配資源，需設定兩個欄位，requests和limit
@@ -8,3 +10,5 @@
 ##### 查看Node CPU/Memory資源
     kubectl describe nodes <Node Name> | grep -A11 Capacity
 > 查看cpu欄位，如顯示4就代表您有4000個mCPU
+## Pod AutoScaling
+### 說明: 透過AutoScaling有效的控管Pod使用數量，讓資源妥善運用，並且當規則配置完成後，當遇到大量需求量時，會透過閥值偵測，自動擴充Pod的數量，後續需求量減少，會自己將Pod回收。
