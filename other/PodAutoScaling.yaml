@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: podautoscaling
+  name: podautoscaling
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: podautoscaling
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: podautoscaling
+    spec:
+      containers:
+      - image: nginx:1.14
+        name: nginx
+        resources:
+          requests:
+            cpu: 100m
+            memory: 200Mi
+          limits:
+            cpu: 200m
+            memory: 400Mi
