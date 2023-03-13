@@ -21,6 +21,15 @@
     kubectl edit deployments.apps -n kube-system metrics-server
 ![image](https://user-images.githubusercontent.com/39659664/224663352-adcc7054-66db-48a1-b847-93d9a191101e.png)
 > 新增 --kubelet-insecure-tls
+##### 步驟三: 驗證
+    kubectl get deployments.apps -n kube-system metrics-server
+![image](https://user-images.githubusercontent.com/39659664/224665264-505165bf-61a1-4b4e-9122-39fa88ed98c1.png)
+> 確認是否READY
+#### 使用率查看
+##### Node
+    kubectl top node
+##### Pod
+    kubectl top pods
 ## [ Pod AutoScaling ]
 ![image](https://user-images.githubusercontent.com/39659664/224660612-84ec2739-4c5a-4a15-96fb-0c31ec69250d.png)
 ### 說明: 透過AutoScaling有效的控管Pod使用數量，讓資源妥善運用，並且當規則配置完成後，當遇到大量需求量時，會透過閥值偵測，自動擴充Pod的數量，後續需求量減少，會自己將Pod回收。
