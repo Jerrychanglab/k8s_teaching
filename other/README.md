@@ -7,3 +7,4 @@
 ##### 查看Node CPU資源
     kubectl describe nodes k8s-worker01 | grep -A11 Capacity
 > 查看cpu欄位，如顯示4就代表您有4000個mCPU
+## Memory說明: 與傳統記憶體認知無差別，配置資源時可用(k、Ki、M、Mi、G、Gi)等單位，也是要配置requests和limitx欄位。
