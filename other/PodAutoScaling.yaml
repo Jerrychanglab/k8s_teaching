@@ -1,28 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  creationTimestamp: null
   labels:
     app: podautoscaling
   name: podautoscaling
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: podautoscaling
   template:
     metadata:
-      creationTimestamp: null
       labels:
         app: podautoscaling
     spec:
       containers:
-      - image: nginx:1.14
-        name: nginx
+      - image: gcr.io/google-samples/hello-app:1.0
+        name: hello
         resources:
           requests:
-            cpu: 100m
-            memory: 200Mi
+            cpu: <Small mCPU / eg:100m>
+            memory: <Small Memory / eg:200Mi>
           limits:
-            cpu: 200m
-            memory: 400Mi
+            cpu: <Max mCPU / eg:200m>
+            memory: <Max Memory / eg:400Mi>
