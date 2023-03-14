@@ -17,7 +17,7 @@
 ##### 步驟一:抓取yaml
     kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
 > 部署metrics server會存在kube-system的namespaces內
-##### 步驟二:修改yaml新增tls by pass參數
+##### 步驟二:修改yaml新增tls參數，不驗證CA證書
     kubectl edit deployments.apps -n kube-system metrics-server
 ![image](https://user-images.githubusercontent.com/39659664/224663352-adcc7054-66db-48a1-b847-93d9a191101e.png)
 > 新增 --kubelet-insecure-tls
