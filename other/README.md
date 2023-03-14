@@ -50,4 +50,19 @@
 ##### 步驟二: 建置Service，讓Pod能進入負載平衡。
     kubectl apply -f ServiceAutoScaling.yaml
 ##### 步驟三: 建置AutoScaling
-> 開啟AutoScaling.yaml進行修改
+> 開啟AutoScaling.yaml進行修改。
+
+![image](https://user-images.githubusercontent.com/39659664/224888623-ebcddd37-1515-4848-ad45-71db06650266.png)
+
+    kubectl apply -f AutoScaling.yaml
+##### 步驟四: 查看HPA狀態    
+    kubectl get hpa <autoscaling name>
+![image](https://user-images.githubusercontent.com/39659664/224889367-fa216698-79dd-4d51-9c3f-ed82509f650d.png)
+##### 步驟五: 驗證(透過ab來進行壓測)
+    kubectl get svc serviceautoscaling
+> 查詢創建出的SVC
+
+    ab -n 1000 -c 1000 http://<node ip>:<External Port>/
+> -n:請求數 / -c 併發連線數
+
+##### 步驟一: 透過Deployment創建服務(定義cpu/memory的requests/limits)
