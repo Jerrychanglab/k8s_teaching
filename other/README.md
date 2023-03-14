@@ -38,5 +38,16 @@
     kubectl top pods
 ## [ Pod AutoScaling ]
 ![image](https://user-images.githubusercontent.com/39659664/224660612-84ec2739-4c5a-4a15-96fb-0c31ec69250d.png)
-### 說明: 透過AutoScaling有效的控管Pod使用數量，讓資源妥善運用，並且當規則配置完成後，當遇到大量需求量時，會透過閥值偵測，自動擴充Pod的數量，後續需求量減少，會自己將Pod回收。
-> 備註:必須要在Deployment佈建出來的Pod才能採用此功能。
+### 說明: 透過AutoScaling有效的控管Pod使用數量，讓資源妥善運用，並且當規則配置完成後，當遇到大量需求量時，會透過閥值偵測(Metrice Server)，自動擴充Pod的數量，後續需求量減少，會自己將Pod回收。
+> 備註:HPA機制，仰賴Metrice Server，如無此服務，會倒置HPA功能失效。
+#### HPA建置
+##### 步驟一: 透過Deployment創建服務(定義cpu/memory的requests/limits)
+> 開啟PodAutoScaling.yaml，進行修改。(注意:limits數值不能小於requests)
+
+![image](https://user-images.githubusercontent.com/39659664/224886976-160e13c8-a673-404b-8941-6ce0564a91d5.png)
+
+    kubectl apply -f PodAutoScaling.yaml
+##### 步驟二: 建置Service，讓Pod能進入負載平衡。
+    kubectl apply -f ServiceAutoScaling.yaml
+##### 步驟三: 建置AutoScaling
+> 開啟AutoScaling.yaml進行修改
