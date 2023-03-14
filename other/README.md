@@ -62,7 +62,10 @@
     kubectl get svc serviceautoscaling
 > 查詢創建出的SVC
 
+    watch kubectl get pod
+> 開請新的終端機監控Pod的啟動數量
+
     ab -n 1000 -c 1000 http://<node ip>:<External Port>/
 > -n:請求數 / -c 併發連線數
-
-##### 步驟一: 透過Deployment創建服務(定義cpu/memory的requests/limits)
+##### 步驟六: 結論
+此實驗會發現，HPA與Replicasets的關係，當Deployment部署時，Pod數量會先採用Replicasets，但當觸發HPA時，後續的控制都會交由HPA定義的數量。
