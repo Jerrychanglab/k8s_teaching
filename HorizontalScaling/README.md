@@ -14,7 +14,7 @@
 ## [ Metrics採集 ]
 ### 說明: K8s環境建置後，想暸解每個Node或pod資源使用率多少，必須安裝採集器，來收集此資訊。
 #### Metrics Server建置
-##### 步驟一:抓取HPA yaml
+##### 步驟一:抓取Metrics yaml
     kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/high-availability-1.21+.yaml
 > 部署metrics server會存在kube-system的namespaces內
 > 必須要有兩個Node節點才能部署
