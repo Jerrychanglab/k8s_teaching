@@ -39,7 +39,7 @@
     kubectl cordon <work node>
 ### 說明:Drain(應隔離)，Node強制維護，會將上面的Pod全數驅離。
 ##### 操作指令
-    kubectl drain <work node> --ingore-daemonsets
+    kubectl drain <work node> --ignore-daemonsets
 ##### 查看指令
     kubectl get nodes | grep SchedulingDisabled //有顯示的Node代表維護狀態
 ##### 解除維護
