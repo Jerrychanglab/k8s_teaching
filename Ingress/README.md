@@ -22,7 +22,7 @@
 #### 建置流程
 ##### 步驟一:建置兩個服務。
 > 部署PodAIngress.yaml與PodBIngress.yaml，兩個Nginx服務。
-##### 步驟二:建立兩個Serice。
+##### 步驟二:建立兩個Service。
 > 部署ServiceAIngress.yaml與ServiceBIngress.yaml，內容採用Default Cluster IP 
 ![image](https://user-images.githubusercontent.com/39659664/225514278-fa4ad363-5244-438a-a0da-4938adbf62bd.png)
 
