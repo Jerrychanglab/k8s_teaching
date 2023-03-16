@@ -2,10 +2,10 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: podaingress 
+    app: podaingress
   name: podaingress
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: podaingress
@@ -15,13 +15,5 @@ spec:
         app: podaingress
     spec:
       containers:
-      - image: nginx
-        name: nginx
-        livenessProbe:
-         httpGet:
-           path: /index.html
-           port: 80
-        startupProbe:
-         httpGet:
-           path: /index.html
-           port: 80
+      - image: gcr.io/google-samples/hello-app:1.0
+        name: hello

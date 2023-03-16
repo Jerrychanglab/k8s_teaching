@@ -7,8 +7,7 @@ metadata:
 spec:
   ports:
   - protocol: TCP
-    port: 801
+    port: <Service Port>
     targetPort: 8080
   selector:
-    app: podaingress
-  type: NodePort
+    app: <A Service Deployment Name>

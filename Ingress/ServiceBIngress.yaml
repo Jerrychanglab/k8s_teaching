@@ -7,8 +7,7 @@ metadata:
 spec:
   ports:
   - protocol: TCP
-    port: 802
+    port: <Service Port>
     targetPort: 8080
   selector:
-    app: podbingress
-  type: NodePort
+    app: <A Service Deployment Name>
