@@ -38,6 +38,8 @@
 * Cluster IP
 * NodePort
 * LoadBalancer
+### Ingress
+* Nginx Ingress
 ### HorizontalScaling(水平縮放)
 * 資源概念(CPU/RAM)
 * Metrics採集
