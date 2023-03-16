@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: serviceaingress
+  name: serviceaingress
+spec:
+  ports:
+  - protocol: TCP
+    port: 801
+    targetPort: 8080
+  selector:
+    app: podaingress
+  type: NodePort

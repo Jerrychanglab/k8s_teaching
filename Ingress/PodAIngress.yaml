@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: podaingress 
+  name: podaingress
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: podaingress
+  template:
+    metadata:
+      labels:
+        app: podaingress
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+        livenessProbe:
+         httpGet:
+           path: /index.html
+           port: 80
+        startupProbe:
+         httpGet:
+           path: /index.html
+           port: 80

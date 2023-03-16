@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-multiple
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: api.example.com
+      http:
+        paths:
+        - path: /age
+          pathType: Prefix
+          backend:
+            service:
+              name: serviceaingress
+              port:
+                number: 801
+    - host: api.example.com
+      http:
+        paths:
+        - path: /con
+          pathType: Prefix
+          backend:
+            service:
+              name: servicebingress
+              port:
+                number: 802
+                
