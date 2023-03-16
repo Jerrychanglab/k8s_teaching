@@ -36,10 +36,10 @@
 #### 2.創建Service的NodePort模式
 ##### 方法一: 透過Yaml建置，可看NodePort.yaml
 ![image](https://user-images.githubusercontent.com/39659664/223970705-0d6ded9a-50ef-484e-b496-88458aa91457.png)
-> 透過yaml創建時，能指定Port 30000-50000之間
+> 透過yaml創建時，能指定Port 30000-32767之間
 ##### 方法二: 透過指令綁定Deployment
     kubectl expose deployment <Deployment Name> --type=NodePort --Port=<Internal Service Port> --target-port=<Pod Port>
-> 透過指令綁定時，外部呼叫Port會隨機配發，範圍(30000-50000)
+> 透過指令綁定時，外部呼叫Port會隨機配發，範圍(30000-32767)
 #### 3.查看NodePort
     kubectl get svc
 ![image](https://user-images.githubusercontent.com/39659664/223974411-e30e5a01-4a50-41e9-9d4a-90853c20a097.png)
