@@ -20,14 +20,24 @@
 > 檢查個元件是否有部署上去
 
 #### 建置流程
-##### 步驟一:建置兩個服務。
+##### 步驟一:準備一個Domain
+> 因屬於測試環境，故在Master node寫/etc/hosts，綁定IP部分需拿service的ingress-nginx-controller的Cluster IP
+
+    kubectl get svc -n ingress-nginx
+
+![image](https://user-images.githubusercontent.com/39659664/225532573-511311ae-99dc-42cb-a44d-bbf9cff611dd.png)
+
+> 例:網址:k8s.ingress.com IP:ingress-nginx-controller的Cluster IP
+
+![image](https://user-images.githubusercontent.com/39659664/225533083-d8e58dad-7430-40a2-84fc-7afe4d3e678e.png)
+##### 步驟二:建置兩個服務。
 > 部署PodAIngress.yaml與PodBIngress.yaml，兩個Nginx服務。
-##### 步驟二:建立兩個Service。
+##### 步驟三:建立兩個Service。
 > 部署ServiceAIngress.yaml與ServiceBIngress.yaml，內容採用Default Cluster IP 
 ![image](https://user-images.githubusercontent.com/39659664/225514278-fa4ad363-5244-438a-a0da-4938adbf62bd.png)
 
-##### 步驟三:建置Ingress。
-> 部署Ingress.yaml，講兩個Service綁定。
+##### 步驟四:建置Ingress。
+> 部署Ingress.yaml，兩個Service綁定。
 
 ![image](https://user-images.githubusercontent.com/39659664/225515231-3e182fde-6eb7-4daf-9016-9b7c1e350713.png)
 
