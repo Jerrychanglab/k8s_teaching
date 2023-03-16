@@ -40,4 +40,10 @@
 > 部署Ingress.yaml，兩個Service綁定。
 
 ![image](https://user-images.githubusercontent.com/39659664/225515231-3e182fde-6eb7-4daf-9016-9b7c1e350713.png)
-
+##### 步驟五:驗證
+    curl <Domain>:80/con
+    curl <Domain>:80/age
+  
+###### 結論
+可以觀察到
+可以觀察到，透過
