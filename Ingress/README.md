@@ -13,3 +13,6 @@
 
 ##### 步驟三:建置Ingress。
 > 部署Ingress.yaml，講兩個Service綁定。
+
+![image](https://user-images.githubusercontent.com/39659664/225515231-3e182fde-6eb7-4daf-9016-9b7c1e350713.png)
+
