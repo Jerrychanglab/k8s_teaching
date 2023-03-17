@@ -1,4 +1,4 @@
-HorizontalScaling(水平縮放)
+# HorizontalScaling(水平縮放)
 * 資源概念(CPU/RAM)
 * Metrics採集
 * Pod AutoScaling
