@@ -17,6 +17,10 @@
 * kubelet
 * kube Proxy
 * Container Runtime
+### Pod基礎介紹
+* Pod是什麼
+* Pod與Container的關係
+* Sidecar是什麼
 ### Controller (控制)
 * Labels(標籤)
 * Deployment(部署策略)
@@ -32,8 +36,8 @@
 * EmptyDir(暫時儲存空間)
 * HostPath(本機掛載空間)
 * PV + PVC(NFS掛載)
-* ConfgMap(環境變數-非機密)
-* Secrets(環境變數-機密)
+* ConfigMap(環境變數-非機密)
+* Secret(環境變數-機密)
 ### Service (服務負載平衡) 
 * Cluster IP
 * NodePort
