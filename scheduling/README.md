@@ -107,7 +107,7 @@ spec:
 ##### 總結
 ![image](https://github.com/user-attachments/assets/922fdcf2-a92a-48bc-b63e-11803891a093)
 ## [ Maintain ] (維護)
-### 說明:Cordoning(軟隔離)，Node軟性維護，既有的Pod不會遷移，新的Pod部會部署在此Node。
+### 說明:在 Kubernetes 中，當某個 Node 需要進行維護（如升級、調整資源、重啟）時，可以透過以下兩種方式控制排程器與 Pod 行為。
 ##### 操作指令
     kubectl cordon <work node>
 ### 說明:Drain(應隔離)，Node強制維護，會將上面的Pod全數驅離。
