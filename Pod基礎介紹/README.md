@@ -4,7 +4,7 @@
 * 每個Pod會在Node上運行
 * 每個Pod對應一個應用(如:Nginx)  
 ![image](https://github.com/user-attachments/assets/1d13da9b-1f26-4335-a227-b420e8ffcc1c)
-##### Pod的yaml格式
+##### yaml格式
 ```yaml
 apiVersion: v1
 kind: Pod
@@ -39,3 +39,51 @@ spec:
 * 共用 Pod 的網路與空間，能直接看到主容器的資料與通訊。
 
 ![image](https://github.com/user-attachments/assets/71711225-3fd4-407c-848e-7636e5f0577c)
+##### yaml格式
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-sidecar-pod
+spec:
+  containers:
+  - name: nginx                      # 主容器
+    image: nginx:1.14.2
+    ports:
+    - containerPort: 80
+    volumeMounts:
+    - name: shared-logs
+      mountPath: /var/log/nginx      # nginx 預設 log 路徑
+    resources:
+      requests:
+        cpu: "500m"
+        memory: "128Mi"
+      limits:
+        cpu: "1000m"
+        memory: "256Mi"
+
+  - name: log-agent                  # Sidecar 容器
+    image: busybox
+    command: ["/bin/sh", "-c", "tail -n+1 -F /input/nginx/access.log"]
+    volumeMounts:
+    - name: shared-logs
+      mountPath: /input/nginx        # 讀取 nginx 寫入的 log 目錄
+
+  volumes:
+  - name: shared-logs
+    emptyDir: {}                     # Pod 生命週期內的共享暫存區
+```
+##### 驗證說明
+```
+### 進入pod (nginx) 
+kubectl exec -it nginx-sidecar-pod -c nginx -- sh
+
+### nginx pod寫入資料
+echo "jarry hello" > /var/log/nginx/access.log
+
+### 進入pod (log-agent)
+kubectl exec -it nginx-sidecar-pod -c log-agent -- sh
+
+### 查看是否有共用資料
+cat /input/nginx/access.log
+```
