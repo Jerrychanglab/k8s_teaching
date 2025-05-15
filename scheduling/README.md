@@ -47,18 +47,19 @@ spec:
             cpu: "1000m"
             memory: "256Mi"
 ```
-## [ Taints ] (污點)
+## [ Taints ] (污點) 
 ![image](https://user-images.githubusercontent.com/39659664/223072610-9031e728-d73e-4dbd-a279-b3744eeabf9c.png)
-### 說明:如Node上有Taints時，Pod將無法部署在上面，除非Pod有設定Tolerations，key與value需滿足Taints。
+### 說明: Taints 是設在 Node 上的一種「限制」，用來阻止某些 Pod 被排到這台機器上，Pod 若沒有寫 Toleration 就會被排除，只有有容忍力（toleration）的 Pod 才能通過。
 ##### 操作指令
     kubectl taint node <work node> <key>=<value>:<策略>
-> 策略NoSchedule:如此Node已有Pod存在，不會將其趕走 / NoExecute:如此Pod有Node會將Pod趕走，兩種選擇
+* NoSchedule: 沒有 Toleration 的 Pod 無法被「排程」到該 Node，但已在該 Node 上的 Pod 不會被驅離。
+* NoExecute: 不僅禁止新 Pod 排程，連已在此 Node 上的 Pod，如果沒有對應 Toleration，也會被強制驅離。可搭配 tolerationSeconds 設定延遲時間。
 ##### 修改指令
     kubectl taint node <work node> <key>=<value>:<策略> --overwrite
 ##### 移除指令
     kubectl taint node <work node> <key>-
-##### 查看指令
-    kubectl describe nodes <work node> | grep Taints
+##### 查看指令 key的地方需要更改
+    kubectl get nodes -o jsonpath='{range .items[?(@.spec.taints[0].key=="env")]}{.metadata.name}{"\n"}{end}'
 ## [ Tolerations ] (反向污點)
 ![image](https://user-images.githubusercontent.com/39659664/223073507-ccc3346d-80e5-494c-80fa-387712206032.png)
 > 上圖描述，Pod設定tolerations，key/value有對應與無對應差別
