@@ -136,7 +136,6 @@ spec:
       restartPolicy: Never        # 必須設定為 Never（或 OnFailure）
 ```
 ##### 新增方式 (dry-run=client)
-kubectl create job <job name> --image=<images> --dry-run=client -o yaml > <Job name>.yaml
 kubectl apply -f <job name>.yaml
 ## [ CronJob ] (排程任務)
 ### 指定週期性執行任務時間，可透過CronJob達成
