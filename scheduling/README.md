@@ -104,6 +104,8 @@ spec:
             cpu: "1000m"
             memory: "256Mi"
 ```
+##### 總結
+![image](https://github.com/user-attachments/assets/922fdcf2-a92a-48bc-b63e-11803891a093)
 ## [ Maintain ] (維護)
 ### 說明:Cordoning(軟隔離)，Node軟性維護，既有的Pod不會遷移，新的Pod部會部署在此Node。
 ##### 操作指令
