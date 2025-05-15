@@ -13,7 +13,7 @@
 * 橘色 -> 使用以定義的空間名稱，並指定conatiners內的哪個路徑要共用。
 ### [ EmptyDir ]
 ![image](https://user-images.githubusercontent.com/39659664/223010027-1f7aa4a8-e881-45d9-870b-f185e85bc448.png)
-#### 說明:讓Pod內的Containers使用共用資料空間。(範例:Pod內的containers，分別是:nginx與busybox)
+#### 說明:效果是讓同一個 Pod 內的多個容器可以共用同一塊臨時儲存空間（例如 /var/log），Pod 結束時，資料也會被移除。
 ![image](https://user-images.githubusercontent.com/39659664/223603046-1c3eebea-1cbc-43b0-a44f-d12023c6e8f8.png)
 > 使用EmptDir.yaml，效果是一個Pod內的兩個Containers設定路徑建置軟連結，共同使用臨時空間，如Pod移除，此空間內的資料也會移除。
 ### [ HostPath ]
