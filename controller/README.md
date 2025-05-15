@@ -22,7 +22,38 @@
 ![image](https://user-images.githubusercontent.com/39659664/223021971-28a61756-c518-4702-acd1-10fa7ae686e7.png)
 ### 說明:自訂快速部署策略，並包括ReplicaSet(副本功能)。ReplicaSet功能是Pod的保證存活數量，如Pod異常時，會自動將Pod移除重新生成，滿足ReplicaSet的數值。
 ##### Yaml格式講解
-![image](https://user-images.githubusercontent.com/39659664/223052474-2f963262-a9e7-4fe2-ab53-a0d2446c8866.png)
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment             # Deployment 名稱（會影響產生的 Pod 名稱）
+spec:
+  replicas: 2                        # 想要運行的 Pod 數量
+  selector:
+    matchLabels:  # 與下方 template.metadata.labels 必須一致
+      app: nginx
+      env: prod
+      dept: it-cni
+  template:
+    metadata: 
+      labels: # 與上方 matchLables 必須一致
+        app: nginx
+        env: prod
+        dept: it-cni
+    spec:
+      containers:
+      - name: nginx                  # 容器名稱
+        image: nginx:1.14.2          # 容器鏡像
+        ports:
+        - containerPort: 80          # 容器開放 Port
+        resources:
+          requests:
+            cpu: "500m"              # 最少保留 0.5 顆 CPU
+            memory: "128Mi"          # 最少保留 128MiB 記憶體
+          limits:
+            cpu: "1000m"             # 最多使用 1 顆 CPU
+            memory: "256Mi"          # 最多使用 256MiB 記憶體
+```
 > 備註:Deployment / ReplicaSet / Pod都是有Lables的對應關係，如將其中一個Lables更改或移除，會導致異常。
 ##### 新增方式 (透過dry-run=Client)
     kubectl create deployment <deploymet name> --image=<套件>:<版本> --replicas=<副本數> --dry-run=client -o yaml > <deployment name>.yaml
