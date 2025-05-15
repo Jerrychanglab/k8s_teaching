@@ -5,17 +5,44 @@
 * Persistent
 * ConfgMap
 * Secrets
-## 在使用之前，先說明stoage儲存必須使用到的yaml格式內容。
-![image](https://user-images.githubusercontent.com/39659664/223606158-7b30f3e7-efe5-4f57-863d-445c475df08c.png)
-#### 顏色框架意思說明
-* 紅色 -> 定義一個空間名稱。
-* 藍色 -> 給與此空間名稱，需跑什麼參數。(如:EmtyDir / HostPath / persistentVloumeClaim...等)
-* 橘色 -> 使用以定義的空間名稱，並指定conatiners內的哪個路徑要共用。
 ### [ EmptyDir ]
-![image](https://user-images.githubusercontent.com/39659664/223010027-1f7aa4a8-e881-45d9-870b-f185e85bc448.png)
 #### 說明:效果是讓同一個 Pod 內的多個容器可以共用同一塊臨時儲存空間（例如 /var/log），Pod 結束時，資料也會被移除。
-![image](https://user-images.githubusercontent.com/39659664/223603046-1c3eebea-1cbc-43b0-a44f-d12023c6e8f8.png)
-> 使用EmptDir.yaml，效果是一個Pod內的兩個Containers設定路徑建置軟連結，共同使用臨時空間，如Pod移除，此空間內的資料也會移除。
+![image](https://user-images.githubusercontent.com/39659664/223010027-1f7aa4a8-e881-45d9-870b-f185e85bc448.png)
+##### yaml說明
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-sidecar-pod                 
+spec:
+  containers:
+  - name: nginx                           
+    image: nginx:1.14.2                   
+    ports:
+    - containerPort: 80                   
+    volumeMounts:
+    - name: shared-logs                   # 掛載名為 shared-logs 的 Volume
+      mountPath: /var/log/nginx           # 將 Volume 掛載到 nginx 的 log 資料夾路徑
+    resources:
+      requests:
+        cpu: "500m"                       
+        memory: "128Mi"                   
+      limits:
+        cpu: "1000m"                     
+        memory: "256Mi"                   
+
+  - name: log-agent                       
+    image: busybox                       
+    command: ["/bin/sh", "-c", "tail -n+1 -F /input/nginx/access.log"]
+                                         
+    volumeMounts:
+    - name: shared-logs                  # 與主容器共用同一個 Volume
+      mountPath: /input/nginx            # 掛載在 log-agent 內部為 /input/nginx
+
+  volumes:
+  - name: shared-logs                   # 定義一個名為 shared-logs 的共享 Volume
+    emptyDir: {}                        # 使用 emptyDir 類型：當 Pod 被建立時產生，刪除後資料會消失
+```
 ### [ HostPath ]
 ![image](https://user-images.githubusercontent.com/39659664/223010500-437057b0-c669-439a-80ff-045cdf429e1d.png)
 #### 說明:讓Containers能使用Work Node(本機)空間。
