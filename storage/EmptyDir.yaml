@@ -1,33 +1,32 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: Pod
 metadata:
-  creationTimestamp: null
-  labels:
-    app: emptydir
-  name: emptydir
+  name: nginx-sidecar-pod                 # Pod 名稱
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: emptydir
-  template:
-    metadata:
-      creationTimestamp: null
-      labels:
-        app: emptydir
-    spec:
-      containers:
-      - image: nginx:1.14
-        name: nginx
-        volumeMounts:
-        - name: <volume name>
-          mountPath: /usr/share/nginx/html
-      - image: busybox
-        name: busybox
-        command: ["sh", "-c", "while true; do echo $(hostname) $(date) >> /var/log/index.html; sleep 10; done"]
-        volumeMounts:
-        - name: <volume name>
-          mountPath: /var/log
-      volumes:
-      - name: <volume name>
-        emptyDir: {}
+  containers:
+  - name: nginx                           # 主容器：負責處理 Web 請求並產生日誌
+    image: nginx:1.14.2                   # 使用 nginx 映像檔
+    ports:
+    - containerPort: 80                   # 開啟 80 Port 提供服務
+    volumeMounts:
+    - name: shared-logs                   # 掛載名為 shared-logs 的 Volume
+      mountPath: /var/log/nginx           # 將 Volume 掛載到 nginx 的 log 資料夾路徑
+    resources:
+      requests:
+        cpu: "500m"                       # 最低需求 CPU：0.5 顆
+        memory: "128Mi"                   # 最低需求記憶體：128MiB
+      limits:
+        cpu: "1000m"                      # 最大可用 CPU：1 顆
+        memory: "256Mi"                   # 最大可用記憶體：256MiB
+
+  - name: log-agent                       # Sidecar 容器：模擬 log 收集器
+    image: busybox                        # 使用 busybox 為基礎映像
+    command: ["/bin/sh", "-c", "tail -n+1 -F /input/nginx/access.log"]
+                                         # 每秒追蹤讀取 nginx 的 access.log 檔案
+    volumeMounts:
+    - name: shared-logs                  # 與主容器共用同一個 Volume
+      mountPath: /input/nginx            # 掛載在 log-agent 內部為 /input/nginx
+
+  volumes:
+  - name: shared-logs                   # 定義一個名為 shared-logs 的共享 Volume
+    emptyDir: {}                        # 使用 emptyDir 類型：當 Pod 被建立時產生，刪除後資料會消失
