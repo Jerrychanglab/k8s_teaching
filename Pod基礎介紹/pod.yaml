@@ -10,7 +10,7 @@ spec:
     - containerPort: 80     # 容器開放的服務 Port
     resources:
       requests:
-        cpu: "500m"         # 最好保證 0.5 CPU 
+        cpu: "200m"         # 最好保證 0.2 CPU 
         memory: "128Mi"     # 最少保證 128MiB 記憶體
       limits:
         cpu: "1000m"         # 最多允許使用 1 CPU
