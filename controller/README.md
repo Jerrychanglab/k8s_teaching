@@ -74,6 +74,38 @@ spec:
 ## [ DaemonSet ] (進程守護)
 ![image](https://user-images.githubusercontent.com/39659664/223023844-79d31c33-fb8c-429d-a335-58c087171f9d.png)
 ### 說明:確保所有Node上都運行一個Pod，當有新的Node加入時，Pod也會自動生成在上面。
+##### Yaml格式講解
+```yaml
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: nginx-daemonset              # DaemonSet 名稱
+spec:
+  selector:
+    matchLabels:
+      app: nginx                     # 與下方 template.metadata.labels 一致
+      env: prod
+      dept: it-cni
+  template:
+    metadata:
+      labels:                        # 與上方selector.matchLabels 一致
+        app: nginx
+        env: prod
+        dept: it-cni
+    spec:
+      containers:
+      - name: nginx                  # 容器名稱
+        image: nginx:1.14.2          # 容器 Image 來源（預設 Docker Hub）
+        ports:
+        - containerPort: 80          # 容器對外服務 Port
+        resources:
+          requests:
+            cpu: "200m"              # 最少保證 0.5 顆 CPU
+            memory: "128Mi"          # 最少保證 128MiB 記憶體
+          limits:
+            cpu: "1000m"             # 最多使用 1 顆 CPU
+            memory: "256Mi"          # 最多使用 256MiB 記憶體
+```
 ##### 新增方式
     kubectl create deployment <daemonset name> --image=<套件> --dry-run -o yaml | sed '/null\|{}\|replicas/d;/status/,$d;s/Deployment/DaemonSet/g' > <daemonset name>.yaml
     kubectl apply -f <daemonset name>.yaml
