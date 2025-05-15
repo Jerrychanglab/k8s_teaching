@@ -114,7 +114,27 @@ spec:
     kubectl get daemonsets -o wide
     kubectl get pod <pod name> -o wide //可查看是否pod都在每個Node上
 ## [ Job ] (一次性任務)
-### 說明:執行一次性任務，可透過Job來達成
+### 說明:執行「一次性完成的任務」，不像 Deployment 那樣長期運行
+* 批次轉檔
+* 備份任務
+* 單次初始化腳本
+#### 新增方式Yaml
+```yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: simple-job
+spec:
+  ttlSecondsAfterFinished: 10   # 完成執行後，幾秒內自動刪除
+  template:
+    metadata:
+    spec:
+      containers:
+      - name: sleep-task
+        image: busybox
+        command: ["sh", "-c", "sleep 5"]
+      restartPolicy: Never        # 必須設定為 Never（或 OnFailure）
+```
 ##### 新增方式 (dry-run=client)
 kubectl create job <job name> --image=<images> --dry-run=client -o yaml > <Job name>.yaml
 kubectl apply -f <job name>.yaml
