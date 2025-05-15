@@ -7,7 +7,7 @@
 * CronJob(排程任務)
 ## [ Labels ] (標籤)
 ![image](https://user-images.githubusercontent.com/39659664/223018499-9863ebad-2239-424f-9ea1-62ff4983df51.png)
-### 說明:定義每個物件的群組，如:Pod/Node，可快速收尋分類。
+### 說明:Kubernetes 中的 Label（標籤） 是一組 key=value 格式的附加資訊，可以附加在 Pod、Node、Service 等資源上，用來分類與選取資源群組。
 ##### 新增標籤
     kubectl label <object> <pod name> <key>=<value>
 ##### 修改標籤
