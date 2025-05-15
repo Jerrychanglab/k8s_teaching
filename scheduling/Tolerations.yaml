@@ -1,24 +1,35 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels:
-    app: tolerations
-  name: tolerations
+  name: nginx-deployment
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
-      app: tolerations
+      app: nginx
+      env: prod
+      dept: it-cni
   template:
     metadata:
       labels:
-        app: tolerations
+        app: nginx
+        env: prod
+        dept: it-cni
     spec:
+      tolerations:             # Pod 可容忍哪些 Taints，需與 Node 上的 key / value / effect 完全對應
+      - operator: "Equal"      # 比對方式：Equal 需 key + value 完全匹配
+        key: "env"             # 對應 Node 上的 Taint key
+        value: "prod"          # 對應 Node 上的 Taint value
+        effect: "NoSchedule"   # 對應 Node 上的 Taint effect
       containers:
-      - image: nginx:1.14
-        name: nginx
-      tolerations:
-      - key: "sz"
-        value: "dep"
-        effect: "NoSchedule"
-        operator: "Equal"
+      - name: nginx
+        image: nginx:1.14.2
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: "200m"
+            memory: "128Mi"
+          limits:
+            cpu: "1000m"
+            memory: "256Mi"
