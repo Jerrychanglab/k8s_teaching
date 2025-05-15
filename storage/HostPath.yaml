@@ -1,31 +1,17 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: Pod
 metadata:
-  creationTimestamp: null
-  labels:
-    app: hostpath
-  name: hostpath
+  name: hostpath-demo                    
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: hostpath
-  strategy: {}
-  template:
-    metadata:
-      creationTimestamp: null
-      labels:
-        app: hostpath
-    spec:
-      containers:
-      - image: busybox
-        name: busybox
-        command: ["sh", "-c", "while true; do echo $(hostname) $(date) >> /var/log/index.html; sleep 10; done"]
-        volumeMounts:
-        - name: <volume name>
-          mountPath: /var/log
-      volumes:
-      - name: <volume name>
-        hostPath:
-         path: /root/jarry
-         type: Directory
+  containers:
+  - name: nginx                          
+    image: nginx                         
+    volumeMounts:
+    - name: host-logs                    # 掛載名為 host-logs 的 Volume
+      mountPath: /mnt/host-logs          # 容器內路徑：可看到 Node 的 /var/log 內容
+
+  volumes:
+  - name: host-logs                      # 定義 Volume 名稱
+    hostPath:
+      path: /var/log/jarry               # Node 上實際要掛載的路徑
+      type: DirectoryOrCreate            # 若 Node 上此路徑不存在，則自動建立資料夾
