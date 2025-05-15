@@ -139,15 +139,33 @@ spec:
 ```
 ### 持續查看job執行與完成後是否有自動移除
 kubectl get jobs.batch
+
 ```
 ## [ CronJob ] (排程任務)
 ### 指定週期性執行任務時間，可透過CronJob達成
-##### 新增方式 (dry-run=client)
-    kubectl create cronjob cronjob --image=<images>  --schedule="* * * * *" --dry-run=client -o yaml > CronJob.yaml
-    kubectl apply -f <cronjob>.yaml
-![image](https://user-images.githubusercontent.com/39659664/223049956-3e0d1445-cc93-4002-8eb3-f83848f37973.png)    
+#### 新增方式Yaml
+```yaml
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cronjob
+spec:
+  schedule: "*/1 * * * *"                # 每分鐘執行一次
+  jobTemplate:
+    spec:
+      ttlSecondsAfterFinished: 10        # 執行完成後10秒自動移除
+      template:
+        spec:
+          containers:
+          - name: cronjob
+            image: busybox:1.28
+            command: ["sh", "-c", "echo Hello Jarry"]
+          restartPolicy: OnFailure       # 任務失敗才會重新執行
+```
 > schedule 在更改要執行的時間，標準Linux CronJob用法
-##### 查詢方式
-    kubectl get cronjobs
-##### 移除方式
-    kubectl delete cronjobs <CronJob Name>
+##### 驗證方式
+```
+### 查看cronjobs
+kubectl get cronjobs
+###移除方式
+kubectl delete cronjobs <CronJob Name>
