@@ -7,9 +7,10 @@
 
 ## [ NodeSelector ] (節點選擇)
 ![image](https://user-images.githubusercontent.com/39659664/223045866-6c756acc-0685-4c37-a041-79a631971308.png)
-### 說明:想讓 Pod 部署到特定 Node 上時，需先為 Node 貼上標籤，並在 Pod 中指定對應的 nodeSelector。
+### 說明:想讓 Pod 部署到特定 Node 上時。
+##### 成立條件: 需先為 Node 貼上Lable，並在 Pod 中指定對應的 nodeSelector。
 ##### 建置說明
-    kubectl label nodes <work node> <key>=<vale> //透過前面章節Labels設定與查看
+`kubectl label nodes <work node> <key>=<vale> //透過前面章節Labels設定與查看`
 > 打開yaml,再template底下的spec新增一個nodeSelector，並指定key與value
 ##### Yaml格式說明
 ```yaml
