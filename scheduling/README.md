@@ -65,6 +65,7 @@ spec:
 ![image](https://user-images.githubusercontent.com/39659664/223073507-ccc3346d-80e5-494c-80fa-387712206032.png)
 > 上圖描述，Pod設定tolerations，key/value有對應與無對應差別
 ### 說明: 設定在 Pod 上的屬性，目的是讓該 Pod 可以容忍某些 Node 上的 taint，進而允許被排程到那些有「限制」的節點。
+### 注意: 設定了與 Taints 相符的 Toleration，僅表示 Pod 有資格被部署到該 Node，並不代表它一定會被排程到那台 Node 上。
 ##### Yaml說明
 ```yaml
 apiVersion: apps/v1
