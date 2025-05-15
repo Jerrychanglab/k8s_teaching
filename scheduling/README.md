@@ -10,9 +10,42 @@
 ### 說明:Pod要在指定的Node上運行，須透過此方式。
 ##### 建置說明
     kubectl label nodes <work node> <key>=<vale> //透過前面章節Labels設定與查看
-    kubectl create deployment nodeselector --image=nignx:1.14 --dry-run=client -o yaml > NodeSelector.yaml //創建部署策略
 > 打開yaml,再template底下的spec新增一個nodeSelector，並指定key與value
-![image](https://user-images.githubusercontent.com/39659664/223050664-0792fa78-bcb2-4459-81ef-9354a7ecb786.png)
+##### Yaml格式說明
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment             # Deployment 名稱
+spec:
+  replicas: 2                       
+  selector:
+    matchLabels:                    
+      app: nginx
+      env: prod
+      dept: it-cni
+  template:
+    metadata:
+      labels:                       
+        app: nginx
+        env: prod
+        dept: it-cni
+    spec:
+      nodeSelector:
+        disk: ssd                    # 限定要部署到有 disk=ssd 的 Node
+      containers:
+      - name: nginx
+        image: nginx:1.14.2
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: "200m"
+            memory: "128Mi"
+          limits:
+            cpu: "1000m"
+            memory: "256Mi"
+```
 ## [ Taints ] (污點)
 ![image](https://user-images.githubusercontent.com/39659664/223072610-9031e728-d73e-4dbd-a279-b3744eeabf9c.png)
 ### 說明:如Node上有Taints時，Pod將無法部署在上面，除非Pod有設定Tolerations，key與value需滿足Taints。
