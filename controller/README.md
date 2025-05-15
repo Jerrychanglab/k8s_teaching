@@ -135,8 +135,11 @@ spec:
         command: ["sh", "-c", "sleep 5"]
       restartPolicy: Never        # 必須設定為 Never（或 OnFailure）
 ```
-##### 新增方式 (dry-run=client)
-kubectl apply -f <job name>.yaml
+#### 驗證方式
+```
+### 持續查看job執行與完成後是否有自動移除
+kubectl get jobs.batch
+```
 ## [ CronJob ] (排程任務)
 ### 指定週期性執行任務時間，可透過CronJob達成
 ##### 新增方式 (dry-run=client)
