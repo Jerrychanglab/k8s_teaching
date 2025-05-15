@@ -3,16 +3,14 @@ kind: CronJob
 metadata:
   name: cronjob
 spec:
+  schedule: "*/1 * * * *"                # 每分鐘執行一次
   jobTemplate:
-    metadata:
-      name: cronjob
     spec:
+      ttlSecondsAfterFinished: 10        # 執行完成後10秒自動移除
       template:
-        metadata:
         spec:
           containers:
-          - image: busybox:1.28
-            name: cronjob
-            command: ["echo", "Hello Jarry"]
-          restartPolicy: OnFailure
-  schedule: '*/1 * * * *'
+          - name: cronjob
+            image: busybox:1.28
+            command: ["sh", "-c", "echo Hello Jarry"]
+          restartPolicy: OnFailure       # 任務失敗才會重新執行
