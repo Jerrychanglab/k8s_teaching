@@ -44,10 +44,37 @@ spec:
     emptyDir: {}                        # 使用 emptyDir 類型：當 Pod 被建立時產生，刪除後資料會消失
 ```
 ### [ HostPath ]
-#### 說明:允許 Pod 直接掛載所在 Node（工作節點）上的本機路徑。
+#### 說明:允許 Pod 直接掛載所在 Node（工作節點）上的本機路徑，如Pod移除，work node上的內容會保留。
 ![image](https://user-images.githubusercontent.com/39659664/223010500-437057b0-c669-439a-80ff-045cdf429e1d.png)
+##### Yaml說明
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hostpath-demo                    
+spec:
+  containers:
+  - name: nginx                          
+    image: nginx
+    ports:
+    - containerPort: 80
+    volumeMounts:
+    - name: host-logs                    # 掛載名為 host-logs 的 Volume
+      mountPath: /mnt/host-logs          # 容器內路徑：可看到 Node 的 /var/log 內容
+    resources:
+      requests:
+        cpu: "200m"
+        memory: "128Mi"
+      limits:
+        cpu: "1000m"
+        memory: "256Mi"            
 
-> 使用HostPath.yaml，效果是Containers能使用work node上的路徑空間。如Pod移除，work node上的內容會保留。
+  volumes:
+  - name: host-logs                      # 定義 Volume 名稱
+    hostPath:
+      path: /var/log/jarry               # Node 上實際要掛載的路徑
+      type: DirectoryOrCreate            # 若 Node 上此路徑不存在，則自動建立資料夾
+```
 ### [ Persistent ]
 ![image](https://user-images.githubusercontent.com/39659664/223010972-6128aaf6-19a0-4a14-9e64-1fb0d55e47cb.png)
 #### 說明:讓Containers能使用NFS空間，需採用PersistentVolumes + PersistentVolumesClaims達成此目標。
