@@ -51,23 +51,58 @@ spec:
 ![image](https://user-images.githubusercontent.com/39659664/223072610-9031e728-d73e-4dbd-a279-b3744eeabf9c.png)
 ### 說明: Taints 是設在 Node 上的一種「限制」，用來阻止某些 Pod 被排到這台機器上，Pod 若沒有寫 Toleration 就會被排除，只有有容忍力（toleration）的 Pod 才能通過。
 ##### 操作指令
-    kubectl taint node <work node> <key>=<value>:<策略>
+`kubectl taint node <work node> <key>=<value>:<策略>`
+##### 屬性說明
 * NoSchedule: 沒有 Toleration 的 Pod 無法被「排程」到該 Node，但已在該 Node 上的 Pod 不會被驅離。
 * NoExecute: 不僅禁止新 Pod 排程，連已在此 Node 上的 Pod，如果沒有對應 Toleration，也會被強制驅離。可搭配 tolerationSeconds 設定延遲時間。
 ##### 修改指令
-    kubectl taint node <work node> <key>=<value>:<策略> --overwrite
+`kubectl taint node <work node> <key>=<value>:<策略> --overwrite`
 ##### 移除指令
-    kubectl taint node <work node> <key>-
+`kubectl taint node <work node> <key>-`
 ##### 查看指令 key的地方需要更改
-    kubectl get nodes -o jsonpath='{range .items[?(@.spec.taints[0].key=="env")]}{.metadata.name}{"\n"}{end}'
-## [ Tolerations ] (反向污點)
+`kubectl get nodes -o jsonpath='{range .items[?(@.spec.taints[0].key=="env")]}{.metadata.name}{"\n"}{end}'`
+## [ Tolerations ] (忽略污點)
 ![image](https://user-images.githubusercontent.com/39659664/223073507-ccc3346d-80e5-494c-80fa-387712206032.png)
 > 上圖描述，Pod設定tolerations，key/value有對應與無對應差別
-### 說明:當今天Node上有Taints存在時，但Pod想在此Node上面部署時。
-##### 操作指令
-![image](https://user-images.githubusercontent.com/39659664/223074198-17a099b9-4938-4012-9d2e-3f4c35a538d8.png)
-> 可看目前Work Node01已有配置Taints key=sz value=dep
-![image](https://user-images.githubusercontent.com/39659664/223075223-30fc6f97-29f0-4803-9cf4-8d0a51a24d17.png)s
+### 說明: 設定在 Pod 上的屬性，目的是讓該 Pod 可以容忍某些 Node 上的 taint，進而允許被排程到那些有「限制」的節點。
+##### Yaml說明
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx
+      env: prod
+      dept: it-cni
+  template:
+    metadata:
+      labels:
+        app: nginx
+        env: prod
+        dept: it-cni
+    spec:
+      tolerations:             # Pod 可容忍哪些 Taints，需與 Node 上的 key / value / effect 完全對應
+      - operator: "Equal"      # 比對方式：Equal 需 key + value 完全匹配
+        key: "env"             # 對應 Node 上的 Taint key
+        value: "prod"          # 對應 Node 上的 Taint value
+        effect: "NoSchedule"   # 對應 Node 上的 Taint effect
+      containers:
+      - name: nginx
+        image: nginx:1.14.2
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: "200m"
+            memory: "128Mi"
+          limits:
+            cpu: "1000m"
+            memory: "256Mi"
+```
 ## [ Maintain ] (維護)
 ### 說明:Cordoning(軟隔離)，Node軟性維護，既有的Pod不會遷移，新的Pod部會部署在此Node。
 ##### 操作指令
