@@ -1,23 +1,32 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  creationTimestamp: null
-  labels:
-    app: nodeselector
-  name: nodeselector
+  name: nginx-deployment             # Deployment 名稱
 spec:
-  replicas: 2
+  replicas: 2                       
   selector:
-    matchLabels:
-      app: nodeselector
+    matchLabels:                    
+      app: nginx
+      env: prod
+      dept: it-cni
   template:
     metadata:
-      creationTimestamp: null
-      labels:
-        app: nodeselector
+      labels:                       
+        app: nginx
+        env: prod
+        dept: it-cni
     spec:
-      containers:
-      - image: nginx:1.14
-        name: nginx
       nodeSelector:
-        disk: ssd
+        disk: ssd                    # 限定要部署到有 disk=ssd 的 Node
+      containers:
+      - name: nginx
+        image: nginx:1.14.2
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: "200m"
+            memory: "128Mi"
+          limits:
+            cpu: "1000m"
+            memory: "256Mi"
