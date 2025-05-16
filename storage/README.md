@@ -104,7 +104,7 @@ data:
       listen 80;
       location / {
         default_type text/plain;
-        return 200 'Hello from ConfigMap NGINX config v2';
+        return 200 'Hello from ConfigMap NGINX config';
       }
     }
 ```
