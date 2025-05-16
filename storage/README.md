@@ -91,13 +91,16 @@ spec:
 ### [ ConfigMap ]
 ![image](https://user-images.githubusercontent.com/39659664/223612473-5118e1c3-9ebc-4d84-9c97-b64f8dfbc0a9.png)
 #### 說明:建立一份設定檔（ConfigMap），可作為環境變數或掛載成檔案，供容器於啟動時讀取使用。
+#### 指令說明:
+##### 查看目前的 configmap
+`kubectl get configmap`
 #### 建置流程:
 ##### 1.創建configMap.yaml
 ```yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: nginx-conf-config
+  name: nginx-conf-config    # configmap名稱
 data:
   custom.conf: |
     server {
@@ -140,6 +143,8 @@ spec:
       name: nginx-conf-config
 ```
 > 使用PodConfigMap.yaml，達成Containers呼叫configmap的參數或文件使用。
+#### 注意事項:
+##### 更新 ConfigMap 後，Pod 不會自動載入新內容，若為 Deployment 管理，需執行 rollout restart 重新部署以套用變更。
 ### [ Secrets ]
 使用說明: 透過加密機制，將加密內容傳遞給Containers的環境變數使用。
 > 此範例透過Secrets加密，更改Mysql的登入密碼。
