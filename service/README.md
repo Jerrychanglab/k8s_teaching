@@ -1,6 +1,8 @@
 # Service (服務)使用說明
 ### 介紹
 #### 透過Deployment部署多個Pod時，不太可能指定Pod IP單獨連線，這時就需要Service功能，在Deployment前面多一層VIP入口，並連線平均分散在每個Pod上。
+### 重要
+* Kubernetes 的 Service 並不會「綁定某個 Deployment或」，它只會根據 selector label 去匹配 Pod。若多個 Deployment 使用相同 label，這些 Pod 都會被這個 Service 同時導向。
 #### 章節
 * Cluster IP
 * NodePort
@@ -9,40 +11,69 @@
 ![image](https://user-images.githubusercontent.com/39659664/223951242-60974232-ae7b-4b7b-9d4d-3029759f42d8.png)
 ### 說明: 提供集群內部的服務存取入口，僅可由同一個叢集內的服務呼叫。
 > 備註:非此k8s的叢集內的服務，會無法呼叫到放出的VIP。
-#### 部署服務
+#### 部署服務: 呼叫服務時會回應Pod的IP驗證是否有負載均衡
+##### 1. 建置ConfigMap
+```yaml
+kind: ConfigMap
+metadata:
+  name: nginx-conf-ip
+data:
+  custom.template: |
+    server {
+      listen 80;
+      location / {
+        default_type text/plain;
+        return 200 "Hello from Pod IP: ${POD_IP}\n";
+      }
+    }
+```
+##### 2. 建置Nginx服務(Deployment)
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-deployment             # Deployment 名稱
+  name: nginx-ip-dynamic
 spec:
   replicas: 2
   selector:
-    matchLabels:  # 與下方 template.metadata.labels 必須一致
+    matchLabels:
       app: nginx
-      env: prod
+      env: test
       dept: it-cni
   template:
-    metadata: 
-      labels: # 與上方 matchLables 必須一致
+    metadata:
+      labels:
         app: nginx
-        env: prod
+        env: test
         dept: it-cni
     spec:
       containers:
       - name: nginx
-        image: nginx:latest
+        image: nginx:1.14.2
         ports:
-        - containerPort: 80          # 容器開放 Port
+          - containerPort: 80
         resources:
           requests:
             cpu: "200m"
             memory: "128Mi"
           limits:
             cpu: "1000m"
-            memory: "256Mi"
+            memory: "256Mi"        
+        command: ["/bin/sh", "-c"]
+        args:
+          - |
+            export POD_IP=$(hostname -i);
+            envsubst < /etc/nginx/template/custom.template > /etc/nginx/conf.d/default.conf;
+            nginx -g 'daemon off;';
+        volumeMounts:
+        - name: nginx-template
+          mountPath: /etc/nginx/template
+      volumes:
+      - name: nginx-template
+        configMap:
+          name: nginx-conf-ip
 ```
-#### 2.創建Service的Cluster IP模式
+##### 3. 建置SVC (Cluster IP)
 ```yaml
 apiVersion: v1
 kind: Service
@@ -52,20 +83,13 @@ spec:
   type: ClusterIP                 # 預設值，可省略；僅供集群內部使用
   selector:
     app: nginx                    # 與 deployment 的 Pod Label 匹配
-    env: prod
+    env: test
     dept: it-cni
   ports:
   - port: 8080                    # Service 對外提供的 Port（VIP Port）
     targetPort: 80                # 對應 Pod 中 containerPort
     protocol: TCP
-```
-#### 3.查看放出的Cluster IP
-```bash
-kubectl get svc
-#===輸出
-NAME                      TYPE        CLUSTER-IP    EXTERNAL-IP   PORT(S)    AGE
-kubernetes                ClusterIP   10.144.5.1    <none>        443/TCP    6d23h
-nginx-clusterip-service   ClusterIP   10.144.5.18   <none>        8080/TCP   7m29s
+
 ```
 #### 4.驗證方式
 ```bash
