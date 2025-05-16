@@ -93,7 +93,9 @@ spec:
 #### 說明:建立一份設定檔（ConfigMap），可作為環境變數或掛載成檔案，供容器於啟動時讀取使用。
 #### 指令說明:
 ##### 查看目前的 configmap
-`kubectl get configmap`
+```bash
+kubectl get configmap
+```
 #### 建置流程:
 ##### 1.創建configMap.yaml
 ```yaml
@@ -101,7 +103,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: nginx-conf-config    # configmap名稱
-data:
+data:                        # 文件內容
   custom.conf: |
     server {
       listen 80;
