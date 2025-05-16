@@ -149,7 +149,10 @@ spec:
 ##### 更新 ConfigMap 後，Pod 不會自動載入新內容，若為 Deployment 管理，需執行 rollout restart 重新部署以套用變更。
 ### [ Secrets ]
 使用說明: 透過加密機制，將加密內容傳遞給Containers的環境變數使用。
-> 此範例透過Secrets加密，更改Mysql的登入密碼。
+#### 指令說明:
+```data
+kubectl get secrets
+```
 #### 建置流程:
 ##### 創建Secret.yaml
 ```yaml
