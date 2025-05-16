@@ -7,17 +7,58 @@
 * LoadBalancer
 ## [ Cluster IP ] (內部服務使用)
 ![image](https://user-images.githubusercontent.com/39659664/223951242-60974232-ae7b-4b7b-9d4d-3029759f42d8.png)
-### 說明: 提供k8s集群內的服務呼叫。
+### 說明: 提供集群內部的服務存取入口，僅可由同一個叢集內的服務呼叫。
 > 備註:非此k8s的叢集內的服務，會無法呼叫到放出的VIP。
-### 操作介紹
-#### 1.使用PodClusterIP.yaml建立服務出來。
-> 此Pod image採用google-samples的hello來展示。
+#### 部署服務
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment             # Deployment 名稱
+spec:
+  replicas: 2
+  selector:
+    matchLabels:  # 與下方 template.metadata.labels 必須一致
+      app: nginx
+      env: prod
+      dept: it-cni
+  template:
+    metadata: 
+      labels: # 與上方 matchLables 必須一致
+        app: nginx
+        env: prod
+        dept: it-cni
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 80          # 容器開放 Port
+        resources:
+          requests:
+            cpu: "200m"
+            memory: "128Mi"
+          limits:
+            cpu: "1000m"
+            memory: "256Mi"
+```
 #### 2.創建Service的Cluster IP模式
-> 可透過Yaml建置，也可透過指令。
-##### 方法一: 透過Yaml建置，可看ClusterIP.yaml
-![image](https://user-images.githubusercontent.com/39659664/223954782-57fa0c41-d5b5-4583-bbb8-4d6bb7c626ad.png)
-##### 方法二: 透過指令綁定Deployment
-    kubectl expose deployment <Deployment Name> --type=ClusterIP --port=<Service Port> --target-port=<Pod Port>
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-clusterip-service   # Service 名稱，可自訂
+spec:
+  type: ClusterIP                 # 預設值，可省略；僅供集群內部使用
+  selector:
+    app: nginx                    # 與 deployment 的 Pod Label 匹配
+    env: prod
+    dept: it-cni
+  ports:
+  - port: 8080                    # Service 對外提供的 Port（VIP Port）
+    targetPort: 80                # 對應 Pod 中 containerPort
+    protocol: TCP
+```
 #### 3.查看放出的Cluster IP
     kubectl get svc
 ![image](https://user-images.githubusercontent.com/39659664/223956134-caff6f0b-6fb6-4ccf-bee1-8906539ca1fd.png)
