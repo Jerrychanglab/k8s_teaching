@@ -171,11 +171,11 @@ spec:
   - name: mysql
     image: mysql:5.7
     env:
-    - name: MYSQL_ROOT_PASSWORD
+    - name: MYSQL_ROOT_PASSWORD # MySQL 容器內建的環境變數，用於設定 root 密碼
       valueFrom:
         secretKeyRef:
-          name: mysql-secret
-          key: rootpw
+          name: mysql-secret    # 這裡引用的是事先建立的 Secret 資源名稱
+          key: rootpw           # 對應 Secret.data 中的欄位名稱（即密碼的 key）
     ports:
     - containerPort: 3306
 ```
