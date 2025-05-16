@@ -156,20 +156,38 @@ spec:
 
 ## [ NodePort ] (內/外部服務使用)
 ![image](https://user-images.githubusercontent.com/39659664/223967264-5f4b3145-12c0-45ef-bddc-4eabec5d02d5.png)
-### 說明: 將每個Node的IP都變成是服務入口，並會配一個Port提供服務使用。
-> 此模式，只要服務能與Node IP溝通到，就可以連線此服務。
-### 操作介紹
-#### 1.使用PodNodePort.yaml建立服務出來。
-> 此Pod image採用google-samples的hello來展示。
-#### 2.創建Service的NodePort模式
-##### 方法一: 透過Yaml建置，可看NodePort.yaml
-![image](https://user-images.githubusercontent.com/39659664/223970705-0d6ded9a-50ef-484e-b496-88458aa91457.png)
-> 透過yaml創建時，能指定Port 30000-32767之間
-##### 方法二: 透過指令綁定Deployment
-    kubectl expose deployment <Deployment Name> --type=NodePort --Port=<Internal Service Port> --target-port=<Pod Port>
-> 透過指令綁定時，外部呼叫Port會隨機配發，範圍(30000-32767)
-#### 3.查看NodePort
-    kubectl get svc
+### 說明: NodePort 會在每個 Node 上開放一個固定的 Port 作為服務入口，只要可以連線到任何一台 Node 的該 Port，就能透過 Service 存取後端的 Pod。
+##### 1. 部署SVC (NodePort)
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-nodeport-service
+spec:
+  type: NodePort
+  selector:
+    app: nginx
+    env: test
+    dept: it-cni
+  ports:
+    - port: 8080           # 集群內呼叫的服務 Port
+      targetPort: 80       # Pod 的 container Port
+      nodePort: 30080      # 外部呼叫用的 Port（必須在 30000-32767 之間）
+      protocol: TCP
+```
+##### 2.查看NodePort
+```bash
+kubectl get svc
+## 輸出
+nginx-nodeport-service    NodePort    10.144.5.19   <none>        8080:30080/TCP   7m50s
+```
+##### 3. 驗證
+```bash
+# 叢集內呼叫
+curl 10.144.5.19:8080
+# 叢集外呼叫
+curl <Node Ip>:30080
+```
 ![image](https://user-images.githubusercontent.com/39659664/223974411-e30e5a01-4a50-41e9-9d4a-90853c20a097.png)
 #### 4.驗證方式
 ##### 呼叫內部IP:Port 
