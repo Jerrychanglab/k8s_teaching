@@ -60,11 +60,17 @@ spec:
     protocol: TCP
 ```
 #### 3.查看放出的Cluster IP
-    kubectl get svc
-![image](https://user-images.githubusercontent.com/39659664/223956134-caff6f0b-6fb6-4ccf-bee1-8906539ca1fd.png)
-> 可看到cluster ip 有一個VIP，與設定的放出的服務Port
+```bash
+kubectl get svc
+#===輸出
+NAME                      TYPE        CLUSTER-IP    EXTERNAL-IP   PORT(S)    AGE
+kubernetes                ClusterIP   10.144.5.1    <none>        443/TCP    6d23h
+nginx-clusterip-service   ClusterIP   10.144.5.18   <none>        8080/TCP   7m29s
+```
 #### 4.驗證方式
-    curl http://<cluster ip>:<port>
+```bash
+curl http://<cluster ip>:<port>
+```
 ![image](https://user-images.githubusercontent.com/39659664/223956662-7cf82714-e868-42fa-83ce-a869ac199e4f.png)
 > 可看到呼叫VIP時會平均的分配底下的Pod服務。
 ## [ NodePort ] (內/外部服務使用)
