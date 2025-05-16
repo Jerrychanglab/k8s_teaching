@@ -188,14 +188,4 @@ curl 10.144.5.19:8080
 # 叢集外呼叫
 curl <Node Ip>:30080
 ```
-![image](https://user-images.githubusercontent.com/39659664/223974411-e30e5a01-4a50-41e9-9d4a-90853c20a097.png)
-#### 4.驗證方式
-##### 呼叫內部IP:Port 
-    curl http://<cluster ip>:<內部Port>
-![image](https://user-images.githubusercontent.com/39659664/223974875-80100bb8-d897-4bb9-8d3c-061917aff007.png)
-> 內部Port，需呼叫Cluster IP
-##### 呼叫外部IP:Port
-    curl http://<node ip>:<外部Port>
-![image](https://user-images.githubusercontent.com/39659664/223975585-04c966b8-cd54-472a-9437-b273d2e321e6.png)
-> 外部Port，需呼叫Node IP
 ## [ LoadBalancer ] (雲上SLB)
