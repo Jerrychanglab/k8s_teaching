@@ -90,13 +90,55 @@ spec:
 > 使用PodMountPVC.yaml，claimName需填寫pvc的name
 ### [ ConfigMap ]
 ![image](https://user-images.githubusercontent.com/39659664/223612473-5118e1c3-9ebc-4d84-9c97-b64f8dfbc0a9.png)
-#### 說明:創建一個環境參數或文件，讓有需要使用此內容的Container自行帶入使用。
+#### 說明:建立一份設定檔（ConfigMap），可作為環境變數或掛載成檔案，供容器於啟動時讀取使用。
 #### 建置流程:
 ##### 1.創建configMap.yaml
-![image](https://user-images.githubusercontent.com/39659664/223613431-dae72a3d-2b78-4ac5-94a1-b10001784d7f.png)
-> 使用ConfigMap.yamls，範例用nginx的default.conf說明
-##### 2.掛載此環境參數或文件。
-![image](https://user-images.githubusercontent.com/39659664/223614311-985f364f-9eb9-411d-9471-63a424d38363.png)
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-conf-config
+data:
+  custom.conf: |
+    server {
+      listen 80;
+      location / {
+        default_type text/plain;
+        return 200 'Hello from ConfigMap NGINX config v2';
+      }
+    }
+```
+##### 2.服務掛載此環境參數或文件。
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+  labels:
+    app: nginx
+    env: test
+    dept: it-cni
+spec:
+  containers:
+  - name: nginx
+    image: nginx:1.14.2
+    ports:
+    - containerPort: 80
+    resources:
+      requests:
+        cpu: "200m"
+        memory: "128Mi"
+      limits:
+        cpu: "1000m"
+        memory: "256Mi"
+    volumeMounts:
+    - name: nginx-config
+      mountPath: /etc/nginx/conf.d
+  volumes:
+  - name: nginx-config
+    configMap:
+      name: nginx-conf-config
+```
 > 使用PodConfigMap.yaml，達成Containers呼叫configmap的參數或文件使用。
 ### [ Secrets ]
 使用說明: 透過加密機制，將加密內容傳遞給Containers的環境變數使用。
