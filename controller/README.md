@@ -116,17 +116,17 @@ spec:
         dept: it-cni
     spec:
       containers:
-      - name: nginx                  # 容器名稱
-        image: nginx:1.14.2          # 容器 Image 來源（預設 Docker Hub）
+      - name: nginx
+        image: nginx:1.14.2
         ports:
-        - containerPort: 80          # 容器對外服務 Port
+        - containerPort: 80
         resources:
           requests:
-            cpu: "200m"              # 最少保證 0.5 顆 CPU
-            memory: "128Mi"          # 最少保證 128MiB 記憶體
+            cpu: "200m"
+            memory: "128Mi"
           limits:
-            cpu: "1000m"             # 最多使用 1 顆 CPU
-            memory: "256Mi"          # 最多使用 256MiB 記憶體
+            cpu: "1000m"
+            memory: "256Mi"
 ```
 ##### 查看方式
 ```bash
