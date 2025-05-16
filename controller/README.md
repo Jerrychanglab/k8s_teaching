@@ -159,7 +159,6 @@ spec:
 ```
 ### 持續查看job執行與完成後是否有自動移除
 kubectl get jobs.batch
-
 ```
 ## [ CronJob ] (排程任務)
 ### 指定週期性執行任務時間，可透過CronJob達成
