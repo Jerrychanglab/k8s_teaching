@@ -149,14 +149,36 @@ spec:
 使用說明: 透過加密機制，將加密內容傳遞給Containers的環境變數使用。
 > 此範例透過Secrets加密，更改Mysql的登入密碼。
 #### 建置流程:
-##### 1.創建Secret.yaml
-    echo -n '<passwd>' | base64
-![image](https://user-images.githubusercontent.com/39659664/223894085-6540614e-c03f-418a-a319-66416fa071b9.png)
-> 使用Secret.yaml，文件內password後面的密碼需填寫base64的字元
+##### 創建Secret.yaml
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mysql-secret
+type: Opaque
+data:
+  rootpw: bXlwYXNzd29yZA==  # mypassword
+```
+> Secret加密是透過base64 (echo -n '<passwd>' | base64) 
 ##### 2.建置Mysql，使用Secret加密機制
-![image](https://user-images.githubusercontent.com/39659664/223894740-6d94579d-e330-4905-9b90-c5cc800ceb6b.png)
-> 使用PodSecrets.yaml
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mysql
+spec:
+  containers:
+  - name: mysql
+    image: mysql:5.7
+    env:
+    - name: MYSQL_ROOT_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: mysql-secret
+          key: rootpw
+    ports:
+    - containerPort: 3306
+```
 ##### 3.部署完成後，請進入Mysql查看
     kubectl exec -it <pod name> -- sh
     mysql -u root -p
-![image](https://user-images.githubusercontent.com/39659664/223895723-140bfdd2-a542-4292-bb46-2888a67bf051.png)
