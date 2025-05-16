@@ -175,7 +175,7 @@ spec:
       nodePort: 30080      # 外部呼叫用的 Port（必須在 30000-32767 之間）
       protocol: TCP
 ```
-##### 2.查看NodePort
+##### 2.查看SVC (NodePort)
 ```bash
 kubectl get svc
 ## 輸出
@@ -188,4 +188,34 @@ curl 10.144.5.19:8080
 # 叢集外呼叫
 curl <Node Ip>:30080
 ```
-## [ LoadBalancer ] (雲上SLB)
+## [ LoadBalancer ] (雲上SLB) (GCP)
+### 說明 : Service 類型為 LoadBalancer 時，Google Kubernetes Engine（GKE）會自動幫你建立一個 GCP 雲端負載平衡器（Cloud Load Balancer），並配置一組 External IP 作為對外入口。
+###### 1. 部署SVC (LoadBalancer)  (使用前面的ConfigMap + Deployment + Pod的Yaml)
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-lb-gcp
+spec:
+  type: LoadBalancer                  # GKE 會自動建立外部 Load Balancer
+  selector:
+    app: nginx
+    env: test
+    dept: it-cni
+  ports:
+    - port: 8080                        # 使用者呼叫的 port
+      targetPort: 80                 # 指向 Pod 的 port
+```
+##### 2. 查看 SVC (LoadBalancer)
+```bash
+kubectl get svc
+## 輸出
+nginx-lb-gcp              LoadBalancer   10.144.5.54   34.80.178.37   80:32730/TCP     47m
+```
+##### 3. 驗證
+```bash
+# 叢集外呼叫 方式一
+curl <Node Ip>:32730
+# 叢集外呼叫 方式二
+curl 34.80.178.37:80
+```
