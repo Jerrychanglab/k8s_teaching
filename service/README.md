@@ -91,9 +91,29 @@ spec:
     protocol: TCP
 
 ```
-#### 4.驗證方式
+##### 4. 查看 SVC (Cluster)
 ```bash
-curl http://<cluster ip>:<port>
+kubectl get svc
+# 輸出
+NAME                      TYPE        CLUSTER-IP    EXTERNAL-IP   PORT(S)    AGE
+kubernetes                ClusterIP   10.144.5.1    <none>        443/TCP    7d
+nginx-clusterip-service   ClusterIP   10.144.5.18   <none>        8080/TCP   48m
+```
+##### 5. 驗證
+```bash
+# 查看目前 Pod的 IP
+kubectl get pod -o wide
+## 輸出
+nginx-ip-dynamic-cb966cbf6-d9rq8   1/1     Running   0             14m     10.219.0.215   gke-n8n-prod-default-pool-c52506a0-4qzp   <none>           <none>
+nginx-ip-dynamic-cb966cbf6-j5xwx   1/1     Running   0             14m     10.219.1.20    gke-n8n-prod-default-pool-d0993e26-tpkw   <none>           <none>
+
+# curl進行呼叫
+curl 10.144.5.18:8080
+## 輸出
+/ # curl 10.144.5.18:8080
+Hello from Pod IP: 10.219.0.215
+/ # curl 10.144.5.18:8080
+Hello from Pod IP: 10.219.1.20
 ```
 ![image](https://user-images.githubusercontent.com/39659664/223956662-7cf82714-e868-42fa-83ce-a869ac199e4f.png)
 > 可看到呼叫VIP時會平均的分配底下的Pod服務。
