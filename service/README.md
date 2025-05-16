@@ -203,19 +203,19 @@ spec:
     env: test
     dept: it-cni
   ports:
-    - port: 8080                        # 使用者呼叫的 port
+    - port: 8080                     # 使用者呼叫的 port
       targetPort: 80                 # 指向 Pod 的 port
 ```
 ##### 2. 查看 SVC (LoadBalancer)
 ```bash
 kubectl get svc
 ## 輸出
-nginx-lb-gcp              LoadBalancer   10.144.5.54   34.80.178.37   80:32730/TCP     47m
+nginx-lb-gcp              LoadBalancer   10.144.5.54   34.80.178.37   8080:32730/TCP     47m
 ```
 ##### 3. 驗證
 ```bash
 # 叢集外呼叫 方式一
 curl <Node Ip>:32730
 # 叢集外呼叫 方式二
-curl 34.80.178.37:80
+curl 34.80.178.37:8080
 ```
