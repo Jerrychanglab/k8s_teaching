@@ -25,10 +25,13 @@ spec:
         memory: "256Mi"     # 最多允許使用 256MiB 記憶體
 ```
 ##### 部署方式
-`kubectl apply -f pod.yaml`
+```bash
+kubectl apply -f pod.yaml
+```
 ##### 查看方式
-`kubectl describe pod nginx`
-
+```bash
+kubectl describe pod nginx
+```
 ## Pod 與 Container 的關係
 ### Pod 就像是一個容器「外殼」，它包裹了一個或多個 container，讓這些 container 在同一個環境中協同運作。
 ![image](https://github.com/user-attachments/assets/c1de2e7f-6857-450f-a390-0644e0f4d830)
