@@ -157,7 +157,7 @@ spec:
 ## [ NodePort ] (內/外部服務使用)
 ![image](https://user-images.githubusercontent.com/39659664/223967264-5f4b3145-12c0-45ef-bddc-4eabec5d02d5.png)
 ### 說明: NodePort 會在每個 Node 上開放一個固定的 Port 作為服務入口，只要可以連線到任何一台 Node 的該 Port，就能透過 Service 存取後端的 Pod。
-##### 1. 部署SVC (NodePort)
+##### 1. 部署SVC (NodePort)  (使用前面的ConfigMap + Deployment + Pod的Yaml)
 ```yaml
 apiVersion: v1
 kind: Service
