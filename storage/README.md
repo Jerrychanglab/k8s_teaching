@@ -180,5 +180,7 @@ spec:
     - containerPort: 3306
 ```
 ##### 3.部署完成後，請進入Mysql查看
-    kubectl exec -it <pod name> -- sh
-    mysql -u root -p
+```bash
+kubectl exec -it <pod name> -- sh
+mysql -u root -p
+```
