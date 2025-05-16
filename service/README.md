@@ -99,7 +99,7 @@ NAME                      TYPE        CLUSTER-IP    EXTERNAL-IP   PORT(S)    AGE
 kubernetes                ClusterIP   10.144.5.1    <none>        443/TCP    7d
 nginx-clusterip-service   ClusterIP   10.144.5.18   <none>        8080/TCP   48m
 ```
-##### 5. 驗證
+##### 5. 驗證是否有分散需求處理
 ```bash
 # 查看目前 Pod的 IP
 kubectl get pod -o wide
@@ -115,8 +115,45 @@ Hello from Pod IP: 10.219.0.215
 / # curl 10.144.5.18:8080
 Hello from Pod IP: 10.219.1.20
 ```
-![image](https://user-images.githubusercontent.com/39659664/223956662-7cf82714-e868-42fa-83ce-a869ac199e4f.png)
-> 可看到呼叫VIP時會平均的分配底下的Pod服務。
+##### 6. 驗證 Pod加上一樣的Lable是否也以被svc託管
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-ip-pod
+  labels:
+    app: nginx
+    env: test
+    dept: it-cni
+spec:
+  containers:
+  - name: nginx
+    image: nginx:1.14.2
+    ports:
+      - containerPort: 80
+    resources:
+      requests:
+        cpu: "200m"
+        memory: "128Mi"
+      limits:
+        cpu: "1000m"
+        memory: "256Mi"
+    command: ["/bin/sh", "-c"]
+    args:
+      - |
+        export POD_IP=$(hostname -i);
+        envsubst < /etc/nginx/template/custom.template > /etc/nginx/conf.d/default.conf;
+        nginx -g 'daemon off;';
+    volumeMounts:
+      - name: nginx-template
+        mountPath: /etc/nginx/template
+  volumes:
+    - name: nginx-template
+      configMap:
+        name: nginx-conf-ip
+```
+##### 7. 如步驟 5 進行驗證
+
 ## [ NodePort ] (內/外部服務使用)
 ![image](https://user-images.githubusercontent.com/39659664/223967264-5f4b3145-12c0-45ef-bddc-4eabec5d02d5.png)
 ### 說明: 將每個Node的IP都變成是服務入口，並會配一個Port提供服務使用。
