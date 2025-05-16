@@ -10,7 +10,9 @@
 ### 說明:想讓 Pod 部署到特定 Node 上時。
 ##### 成立條件: 需先為 Node 貼上Lable，並在 Pod 中指定對應的 nodeSelector。
 ##### 建置說明
-`kubectl label nodes <work node> <key>=<vale> //透過前面章節Labels設定與查看`
+```bash
+kubectl label nodes <work node> <key>=<vale> //透過前面章節Labels設定與查看`
+```
 > 打開yaml,再template底下的spec新增一個nodeSelector，並指定key與value
 ##### Yaml格式說明
 ```yaml
@@ -51,16 +53,24 @@ spec:
 ![image](https://user-images.githubusercontent.com/39659664/223072610-9031e728-d73e-4dbd-a279-b3744eeabf9c.png)
 ### 說明: Taints 是設在 Node 上的一種「限制」，用來阻止某些 Pod 被排到這台機器上，Pod 若沒有寫 Toleration 就會被排除，只有有容忍力（toleration）的 Pod 才能通過。
 ##### 操作指令
-`kubectl taint node <work node> <key>=<value>:<策略>`
+```bash
+kubectl taint node <work node> <key>=<value>:<策略>
+```
 ##### 屬性說明
 * NoSchedule: 沒有 Toleration 的 Pod 無法被「排程」到該 Node，但已在該 Node 上的 Pod 不會被驅離。
 * NoExecute: 不僅禁止新 Pod 排程，連已在此 Node 上的 Pod，如果沒有對應 Toleration，也會被強制驅離。可搭配 tolerationSeconds 設定延遲時間。
 ##### 修改指令
-`kubectl taint node <work node> <key>=<value>:<策略> --overwrite`
+```bash
+kubectl taint node <work node> <key>=<value>:<策略> --overwrite
+```
 ##### 移除指令
-`kubectl taint node <work node> <key>-`
+```bash
+kubectl taint node <work node> <key>-
+```
 ##### 查看指令 key的地方需要更改
-`kubectl get nodes -o jsonpath='{range .items[?(@.spec.taints[0].key=="env")]}{.metadata.name}{"\n"}{end}'`
+```bash
+kubectl get nodes -o jsonpath='{range .items[?(@.spec.taints[0].key=="env")]}{.metadata.name}{"\n"}{end}'
+```
 ## [ Tolerations ] (忽略污點)
 ![image](https://user-images.githubusercontent.com/39659664/223073507-ccc3346d-80e5-494c-80fa-387712206032.png)
 > 上圖描述，Pod設定tolerations，key/value有對應與無對應差別
@@ -109,11 +119,19 @@ spec:
 ## [ Maintain ] (維護)
 ### 說明:在 Kubernetes 中，當某個 Node 需要進行維護（如升級、調整資源、重啟）時，可以透過以下兩種方式控制排程器與 Pod 行為。
 ##### 操作指令
-    kubectl cordon <work node>
+```bash
+kubectl cordon <work node>
+```
 ### 說明:Drain(應隔離)，Node強制維護，會將上面的Pod全數驅離。
 ##### 操作指令
-    kubectl drain <work node> --ignore-daemonsets
+```bash
+kubectl drain <work node> --ignore-daemonsets
+```
 ##### 查看指令
-    kubectl get nodes | grep SchedulingDisabled //有顯示的Node代表維護狀態
+```bash
+kubectl get nodes | grep SchedulingDisabled //有顯示的Node代表維護狀態
+```
 ##### 解除維護
-    kubectl uncordon <work node>
+```bash
+kubectl uncordon <work node>
+```
