@@ -1,3 +1,6 @@
+# k8s歷史
+![image](https://github.com/user-attachments/assets/b6e1037a-f3c3-4232-804f-d988e0569a0a)
+
 # K8s 元件說明
 ![image](https://github.com/user-attachments/assets/0e975b65-0ea9-4502-9aa6-24b39d02246e)
 
