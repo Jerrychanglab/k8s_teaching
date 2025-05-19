@@ -4,6 +4,14 @@
 * 每個Pod會在Node上運行
 * 每個Pod對應一個應用(如:Nginx)  
 ![image](https://github.com/user-attachments/assets/1d13da9b-1f26-4335-a227-b420e8ffcc1c)
+
+### Pod 的 資源換算
+#### 在 Kubernetes 中，CPU 是以 millicore（毫核心）為單位進行分配與限制，而記憶體的計算方式則維持。
+* 1 cpu = 1000 millicore (mcpu)
+##### 例如 
+* 500m = 0.5 CPU
+* 2000m = 2 CPU
+
 ##### yaml格式
 ```yaml
 apiVersion: v1
