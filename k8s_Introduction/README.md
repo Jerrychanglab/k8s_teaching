@@ -24,4 +24,3 @@
 * 動態維護 iptables 規則，將流量導向對應的 Pod。
 ### [ Container Runtime ]
 * 負責實際啟動與管理容器。
-* 支援的實作包含、containerd、CRI-O 等。
