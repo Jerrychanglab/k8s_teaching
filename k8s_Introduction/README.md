@@ -22,5 +22,8 @@
 ### [ Kube Proxy ]
 * 實現服務的「負載平衡」與「網路轉發」。
 * 動態維護 iptables 規則，將流量導向對應的 Pod。
+### [ CRI]
+* 一個標準化介面，用來讓kubelet可以與不同的容器執行環境（Container Runtime）進行溝通。
 ### [ Container Runtime ]
 * 負責實際啟動與管理容器。
+* 如 containerd 、 CRI-O ... 等
