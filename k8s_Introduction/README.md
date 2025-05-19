@@ -1,5 +1,5 @@
 # K8s 元件說明
-![image](https://github.com/user-attachments/assets/6c4553f8-928e-427f-b12e-a72f03c5207f)
+![image](https://github.com/user-attachments/assets/9d227d25-4d02-411f-a2d3-48d0523d8b7e)
 
 ##  Master Node
 ### [ Kube-apiserver ]
@@ -24,4 +24,4 @@
 * 動態維護 iptables 規則，將流量導向對應的 Pod。
 ### [ Container Runtime ]
 * 負責實際啟動與管理容器。
-* 支援的實作包含 Docker、containerd、CRI-O 等。
+* 支援的實作包含、containerd、CRI-O 等。
