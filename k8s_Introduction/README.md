@@ -1,6 +1,6 @@
 # K8s 元件說明
-![image](https://user-images.githubusercontent.com/39659664/223376662-c5933a61-178e-42e6-aa49-99907c86ec92.png)
-> 在說明各元件功能之前，要先認知K8s的最小單位是Pod，一個Pod可以多個container。
+![image](https://github.com/user-attachments/assets/6c4553f8-928e-427f-b12e-a72f03c5207f)
+
 ##  Master Node
 ### [ Kube-apiserver ]
 * Kubernetes 的核心 API 入口，負責接收、驗證並處理來自用戶或元件的 API 請求。
