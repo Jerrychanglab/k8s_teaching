@@ -1,19 +1,27 @@
 # K8s 元件說明
 ![image](https://user-images.githubusercontent.com/39659664/223376662-c5933a61-178e-42e6-aa49-99907c86ec92.png)
 > 在說明各元件功能之前，要先認知K8s的最小單位是Pod，一個Pod可以多個container。
-##  Master Node 
+##  Master Node
 ### [ Kube-apiserver ]
-#### kube-apiserver是kubernetes集群的组件之一，用於處理API請求，並將集群狀態儲存到etcd中。在部署Pod時，用户通過kubectl命令或其他客户端向kube-apiserver發送創建Pod的API請求。
+* Kubernetes 的核心 API 入口，負責接收、驗證並處理來自用戶或元件的 API 請求。
+* 所有元件透過它進行溝通。
+* 寫入或查詢狀態資訊時，會與 etcd 交互。
 ### [ etcd ]
-#### etcd是kubernetes集群的可靠數據儲存，用於儲存集群的狀態信息，例如Pod、Service、ConfigMap、Secret等。當kube-apiserver收到用户創建Pod的請求時，會將Pod的配置信息儲存到 etcd中。
+* 分散式 Key-Value 儲存系統，用來保存整個集群狀態（如 Pod、Service、ConfigMap 等）。
+* 被視為 Kubernetes 的「資料庫」。
 ### [ Scheduler ]
-#### scheduler是kubernetes集群的组件之一，用于將未指定Node的Pod調度到kubernetes集群中的Node上。當scheduler發現新的Pod创建請求時，會根據Pod的調度要求選擇最優的節點，並將該信息存储到etcd中。
+* 將未指定 Node 的 Pod，根據資源條件與策略排程至合適的 Node。
+* 排程結果會寫入 etcd，由 kubelet 執行。
 ### [ Controller Manager ]
-#### controller manager是kubernetes集群的組件之一，用於運行一組控制器，以確保集群的狀態與期望狀態一致。當controller manager檢測到新的Pod創建請求時，會啟動相應的控制器，如:ReplicaSet、Deployment...等，以確保Pod被正確的創建與管理。
+* 負責執行多種控制器（如 ReplicaSet、Deployment 等），持續監控資源狀態。
+* 自動調整實際狀態，使其符合期望狀態。
 ## Work Node
 ### [ Kubelet ]
-#### kubelet是kubernetes集群中的組件之一，負責管理該Node上的容器生命周期，確保Pod在節點上運行的狀態與期望狀態一致。當kubelet接收到從kube-apiserver發送的創建Pod 的請求時，會負責在該Node上創建與運行對應的Pod。
+* 每個 Node 上的代理，負責與 API Server 溝通。
+* 接收 Pod 部署指令後，調用 Container Runtime 啟動容器，並回報狀態。
 ### [ Kube Proxy ]
-#### kube proxy是kubernetes集群中每個Node的重要的组件之一，其主要作用是實現Service的負載均衡和服務發現，並支持Kubernetes内部組件的訪問。通过監聽kube-apiserver中Service的變化化，並更新節點上的iptables規則，以保證請求能够正確轉發到Service後端的Pod上。
+* 實現服務的「負載平衡」與「網路轉發」。
+* 動態維護 iptables 規則，將流量導向對應的 Pod。
 ### [ Container Runtime ]
-#### Container Runtime是kubernetes集群中的组件之一，其主要作用是運行和管理容器，提供容器的隔離與安全性，支持容器鏡像的管理，並與Kubernetes容器编排系统進程集成，以便在 Kubernetes集群中管理和部署容器應用程序。在Kubernetes集群中，常用的Container Runtime包括 Docker、CRI-O、containerd 等。
+* 負責實際啟動與管理容器。
+* 支援的實作包含 Docker、containerd、CRI-O 等。
