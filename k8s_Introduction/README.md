@@ -1,5 +1,5 @@
 # K8s 元件說明
-![image](https://github.com/user-attachments/assets/9d227d25-4d02-411f-a2d3-48d0523d8b7e)
+![image](https://github.com/user-attachments/assets/0e975b65-0ea9-4502-9aa6-24b39d02246e)
 
 ##  Master Node
 ### [ Kube-apiserver ]
