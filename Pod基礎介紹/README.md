@@ -12,6 +12,9 @@
 * 500m = 0.5 CPU
 * 2000m = 2 CPU
 
+### 實體機 VS 虛擬機  
+![image](https://github.com/user-attachments/assets/444e223f-c777-4376-ac92-385ed45c7979)
+
 ##### yaml格式
 ```yaml
 apiVersion: v1
