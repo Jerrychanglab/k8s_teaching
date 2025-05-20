@@ -83,11 +83,76 @@ spec:
 #### 建置流程:
 ##### 1.準備NFS Server
 ##### 2.PV建置，並向NFS Server挖取空間
-> 使用PersistentVolumes.yaml並指定work node能溝通到的nfs ip與路徑，並且pv的labels key:value需與後續pvc一致。
+```yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-pv
+spec:
+  capacity:
+    storage: 5Gi                     # 假設限制為 5Gi，可自行調整
+  accessModes:
+    - ReadWriteMany                  # NFS 支援多個 Pod 同時掛載
+  nfs:
+    server: 10.104.6.63              # NFS 伺服器 IP
+    path: /gcp_backup_volume         # 掛載的實際路徑
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: nfs-sc           # 自定義的 StorageClass 名稱
+```
 ##### 3.PVC與PV邏輯層綁定
-> 使用PersistentVolumesClaims.yaml，pvc的labels key:value需要與pv一致，並且與PV拿儲存空間。
-##### 4.Pod內的Container與PVC綁定。
-> 使用PodMountPVC.yaml，claimName需填寫pvc的name
+```yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nfs-pvc
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: nfs-sc   # 需要與PV的storageClassName完全一致
+```
+##### 4.containers綁定pvc。
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx
+      env: prod
+      dept: it-cni
+  template:
+    metadata:
+      labels:
+        app: nginx
+        env: prod
+        dept: it-cni
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: "200m"
+            memory: "128Mi"
+          limits:
+            cpu: "1000m"
+            memory: "256Mi"
+        volumeMounts:
+        - name: nfs-volume                     # 輸入下方volumes的name
+          mountPath: /usr/share/nginx/html     #nginx 預設目錄
+      volumes:
+      - name: nfs-volume                       # 提供給上方 volumeMounts的 name使用
+        persistentVolumeClaim:
+          claimName: nfs-pvc                   # 這要跟 PVC 名稱一致
+```
 ### [ ConfigMap ]
 ![image](https://user-images.githubusercontent.com/39659664/223612473-5118e1c3-9ebc-4d84-9c97-b64f8dfbc0a9.png)
 #### 說明:建立一份設定檔（ConfigMap），可作為環境變數或掛載成檔案，供容器於啟動時讀取使用。
