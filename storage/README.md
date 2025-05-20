@@ -147,7 +147,7 @@ spec:
             memory: "256Mi"
         volumeMounts:
         - name: nfs-volume                     # 輸入下方volumes的name
-          mountPath: /usr/share/nginx/html     #nginx 預設目錄
+          mountPath: /usr/share/nginx/html
       volumes:
       - name: nfs-volume                       # 提供給上方 volumeMounts的 name使用
         persistentVolumeClaim:
