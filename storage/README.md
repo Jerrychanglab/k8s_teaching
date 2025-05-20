@@ -113,7 +113,7 @@ spec:
       storage: 5Gi
   storageClassName: nfs-sc   # 需要與PV的storageClassName完全一致
 ```
-##### 4.containers綁定pvc。
+##### 4.Containers綁定pvc。
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
