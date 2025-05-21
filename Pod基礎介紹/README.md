@@ -15,7 +15,7 @@
 ### 實體機 VS 虛擬機  
 ![image](https://github.com/user-attachments/assets/444e223f-c777-4376-ac92-385ed45c7979)
 
-##### yaml格式
+##### Pod的yaml格式
 ```yaml
 apiVersion: v1
 kind: Pod
