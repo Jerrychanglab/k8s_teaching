@@ -153,8 +153,10 @@ spec:
       - name: sleep-task
         image: busybox
         command: ["sh", "-c", "sleep 5"]
-      restartPolicy: Never        # 必須設定為 Never（或 OnFailure）
+      restartPolicy: Never        # 必須設定為 Never或 OnFailure
 ```
+* restartPolicy: OnFailure   # 失敗時會嘗試重新啟
+* restartPolicy: Never       # container 結束後不管成功或失敗都不會重啟
 #### 驗證方式
 ```
 ### 持續查看job執行與完成後是否有自動移除
