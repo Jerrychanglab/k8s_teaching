@@ -227,3 +227,11 @@ Rules:
               /a   nginx-nodeport-a-service:80 (10.99.64.15:80)
               /b   nginx-nodeport-b-service:80 (10.99.64.16:80,10.99.64.19:80)
 ```
+###### 測試
+```bash
+curl http://34.8.0.132/a
+輸出: Deploymente A -> Pod IP: 10.99.64.15
+
+curl http://34.8.0.132/b
+輸出: Deploymente B -> Pod IP: 10.99.64.16
+```
