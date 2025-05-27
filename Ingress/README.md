@@ -200,3 +200,16 @@ spec:
             port:
               number: 80
 ```
+##### 步驟三: 驗證
+###### 查看SVC
+```bash
+NAME                       TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)        AGE
+nginx-nodeport-a-service   NodePort    10.14.51.193   <none>        80:30080/TCP   4h24m
+nginx-nodeport-b-service   NodePort    10.14.51.90    <none>        80:30081/TCP   4h24m
+```
+###### 查看Ingress
+```bash
+[root@gke-teaching service]# kubectl get ingress
+NAME               CLASS    HOSTS   ADDRESS      PORTS   AGE
+nginx-ingress-ab   <none>   *       34.8.0.132   80      65m
+```
