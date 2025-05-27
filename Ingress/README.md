@@ -18,7 +18,6 @@ kubectl get all -n ingress-nginx
 ```
 ![image](https://user-images.githubusercontent.com/39659664/225531521-a73b1957-7268-4a20-8ac5-d1d9e0a20054.png)
 > 檢查個元件是否有部署上去
-
 #### 建置流程
 ##### 步驟一: 建置兩個服務
 ###### configmap部署
@@ -175,23 +174,28 @@ spec:
       nodePort: 30081      # 外部訪問用的 Port（必須在 30000-32767 之間）
       protocol: TCP
 ```
-![image](https://user-images.githubusercontent.com/39659664/225532573-511311ae-99dc-42cb-a44d-bbf9cff611dd.png)
-> 例:網址:k8s.ingress.com IP:ingress-nginx-controller的Cluster IP
-
-![image](https://user-images.githubusercontent.com/39659664/225533083-d8e58dad-7430-40a2-84fc-7afe4d3e678e.png)
-##### 步驟二:建置兩個服務。
-> 部署PodAIngress.yaml與PodBIngress.yaml，兩個Nginx服務。
-##### 步驟三:建立兩個Service。
-> 部署ServiceAIngress.yaml與ServiceBIngress.yaml，內容採用Default Cluster IP 
-![image](https://user-images.githubusercontent.com/39659664/225514278-fa4ad363-5244-438a-a0da-4938adbf62bd.png)
-
-##### 步驟四:建置Ingress。
-> 部署Ingress.yaml，兩個Service綁定。
-
-![image](https://user-images.githubusercontent.com/39659664/225515231-3e182fde-6eb7-4daf-9016-9b7c1e350713.png)
-##### 步驟五:驗證
-    curl <Domain>:80/con
-    curl <Domain>:80/age
-  
-###### 結論
-此實驗可以觀察到，透過單一網址的路徑，來達成轉到不同Service底下的服務。
+##### 步驟二: 部署Ingress
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nginx-ingress-ab
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /a                           # 使用者訪問http//:<IP>/a 路徑
+        pathType: Prefix
+        backend:
+          service:
+            name: nginx-nodeport-a-service # 將流量導向此 A Service
+            port:
+              number: 80
+      - path: /b                           # 使用者訪問http//:<IP>/b 路徑
+        pathType: Prefix
+        backend:
+          service:
+            name: nginx-nodeport-b-service # 將流量導向此 B Service
+            port:
+              number: 80
+```
