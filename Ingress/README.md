@@ -212,4 +212,18 @@ nginx-nodeport-b-service   NodePort    10.14.51.90    <none>        80:30081/TCP
 [root@gke-teaching service]# kubectl get ingress
 NAME               CLASS    HOSTS   ADDRESS      PORTS   AGE
 nginx-ingress-ab   <none>   *       34.8.0.132   80      65m
+
+[root@gke-teaching service]# kubectl describe ingress nginx-ingress-ab 
+Name:             nginx-ingress-ab
+Labels:           <none>
+Namespace:        default
+Address:          34.8.0.132
+Ingress Class:    <none>
+Default backend:  <default>
+Rules:
+  Host        Path  Backends
+  ----        ----  --------
+  *           
+              /a   nginx-nodeport-a-service:80 (10.99.64.15:80)
+              /b   nginx-nodeport-b-service:80 (10.99.64.16:80,10.99.64.19:80)
 ```
