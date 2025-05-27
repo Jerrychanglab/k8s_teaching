@@ -133,3 +133,5 @@ spec:
   updatePolicy:
     updateMode: "Off"  # 只建議不實作
 ```
+## [ Cluster AutoScaling (CA) ] 
+### 說明: Cluster Autoscaler 是 K8s 用來根據 Pod 調度狀態，自動擴縮 Node 數量的元件，若有 Pod 處於 Pending，CA 會嘗試擴增現有 Node Pool 的節點。
