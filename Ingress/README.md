@@ -1,8 +1,9 @@
 # Ingress
 ## [ Nginx Ingress ] 
-![image](https://user-images.githubusercontent.com/39659664/225511954-b2cc0554-7a4a-46f1-b003-fa448cdac74e.png)
-### 說明: Ingress主要功能用於一個網址透過網址路徑導向到不同的Service並且每個Service底下都是不同的服務。
-#### 前置準備
+![image](https://github.com/user-attachments/assets/b73c3b53-b691-41c8-a919-00282692523a)
+
+### 說明: Ingress 的主要功能是提供 HTTP/HTTPS 的統一入口，允許使用相同網域名稱下的不同路徑，分別導向到不同的 Service，進而存取後端的多個應用服務。
+#### 前置準備 (如果用GCP內建的可忽略)
 ##### 步驟一:部署Nginx Ingress Contriller
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.6.4/deploy/static/provider/cloud/deploy.yaml
