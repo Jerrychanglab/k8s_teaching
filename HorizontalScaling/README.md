@@ -111,4 +111,25 @@ spec:
         type: Utilization
         averageUtilization: 80  # 當 RAM 使用率超過 80% 時會啟動擴展
 ```
-
+## [ Vertical Pod Autoscaler (VPA) ]
+### 說明: VPA 是 Kubernetes 提供的資源管理元件，能為 Pod 建議或自動調整 requests 和 limits 的值。其用途是「調整單一 Pod 所需資源」，而不是改變 Pod 數量。VPA 搭配 Metrics Server 收集歷史資源使用資料後提出建議，特別適合資源需求不穩定或長時間執行的應用場景。
+#### 模式說明：
+* Off: 只給建議，不做任何調整
+* Initial: 初次啟動 Pod 套用建議值
+* Auto: 動態調整資源，會導致 Pod 重啟
+#### 建議搭配
+* VPA Off 搭配 HPA（避免衝突）
+### VPA搭建
+```yaml
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: nginx-vpa
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: nginx-deployment
+  updatePolicy:
+    updateMode: "Off"  # 只建議不實作
+```
