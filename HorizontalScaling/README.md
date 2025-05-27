@@ -119,7 +119,7 @@ spec:
 * Auto: 動態調整資源，會導致 Pod 重啟
 #### 建議搭配
 * VPA Off 搭配 HPA（避免衝突）
-### VPA搭建
+### VPA Yaml建置
 ```yaml
 apiVersion: autoscaling.k8s.io/v1
 kind: VerticalPodAutoscaler
