@@ -14,7 +14,7 @@ kubectl describe nodes <Node Name> | grep -A11 Capacity
 ```
 > 查看cpu欄位，如顯示4就代表您有4000個mCPU
 ## [ Metrics採集 ]
-### 說明: K8s環境建置後，想暸解每個Node或pod資源使用率多少，必須安裝採集器，來收集此資訊。
+### 說明: 在一般 K8s 環境中，若要查看每個 Node 或 Pod 的資源使用率（CPU / Memory），需安裝 Metrics Server 作為資料採集器。（在 GCP 的 GKE 環境中，Metrics Server 通常已預先安裝）
 #### Metrics Server建置
 ##### 步驟一:抓取Metrics yaml
 ```bash
