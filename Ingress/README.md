@@ -5,7 +5,7 @@
 ### 說明: Ingress 的主要功能是提供 HTTP/HTTPS 的統一入口，允許使用相同網域名稱下的不同路徑，分別導向到不同的 Service，進而存取後端的多個應用服務。
 | 功能類別                       | 功能說明                                           |
 | -------------------------- | ---------------------------------------------- |
-| **路由轉發**                   | 根據 `Host` + `Path` 將流量導向不同的 Service            |
+| **路由轉發**                   | 根據 `IP` + `Path` 將流量導向不同的 Service            |
 | **HTTPS 與 TLS**            | 使用 `ManagedCertificate` 自動配置 TLS，支援自動續期        |
 | **靜態 IP 綁定**               | 將 Ingress 綁定至固定 Global IP，對外 URL 穩定不變          |
 | **HTTP → HTTPS 導轉**        | 自動轉導到 HTTPS，透過 annotation 設定                   |
