@@ -85,7 +85,7 @@ spec:
             memory: "256Mi"          # 最少保留 256 MiB 記憶體
 ```
 ##### 步驟二: 部署HPA
-###### 百分比偵測 Yaml
+###### 百分比偵測 Yaml 範例
 ```yaml
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
@@ -97,7 +97,7 @@ spec:
     kind: Deployment           # 目標資源類型，這裡是 Deployment
     name: nginx-deployment     # 要套用 HPA 的 Deployment 名稱
   minReplicas: 1               # 最少維持的副本數
-  maxReplicas: 2               # 最多擴展到的副本數
+  maxReplicas: 3               # 最多擴展到的副本數
   metrics:
   - type: Resource
     resource:
@@ -112,7 +112,14 @@ spec:
         type: Utilization
         averageUtilization: 80  # 當 RAM 使用率超過 80% 時會啟動擴展
 ```
-###### 絕對值偵測 Yaml
+```bash
+# 驗證
+kubectl get hpa
+# 輸出
+NAME        REFERENCE                     TARGETS                                     MINPODS   MAXPODS   REPLICAS   AGE
+nginx-hpa   Deployment/nginx-deployment   cpu: <unknown>/70%, memory: <unknown>/80%   1         3         0          5s
+```
+###### 絕對值偵測 Yaml 範例
 ```yaml
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
