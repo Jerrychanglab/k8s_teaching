@@ -146,6 +146,13 @@ spec:
         type: AverageValue
         averageValue: 128Mi  # 當 RAM 128Mi 時會啟動擴展
 ```
+```bash
+# 驗證
+kubectl get hpa
+# 輸出
+NAME        REFERENCE                     TARGETS                                        MINPODS   MAXPODS   REPLICAS   AGE
+nginx-hpa   Deployment/nginx-deployment   cpu: <unknown>/200m, memory: <unknown>/128Mi   1         3         0          5s
+```
 ## [ Vertical Pod Autoscaler (VPA) ]
 ### 說明: VPA 是 Kubernetes 提供的資源管理元件，能為 Pod 建議或自動調整 requests 和 limits 的值。其用途是「調整單一 Pod 所需資源」，而不是改變 Pod 數量。VPA 搭配 Metrics Server 收集歷史資源使用資料後提出建議，特別適合資源需求不穩定或長時間執行的應用場景。
 #### 模式說明：
