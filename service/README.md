@@ -4,9 +4,23 @@
 ### 重要
 * Kubernetes 的 Service 並不會「綁定某個 Deployment或」，它只會根據 selector label 去匹配 Pod。若多個 Deployment 使用相同 label，這些 Pod 都會被這個 Service 同時導向。
 #### 章節
+* 使用Domain原則
 * Cluster IP
 * NodePort
 * LoadBalancer
+## [ 使用Domain原則 ]
+### 說明: 在 Kubernetes 叢集中，每個 Service 建立後都會對應一組 內部 DNS 名稱，讓集群內的其他 Pod 可以透過「Domain Name」方式進行存取，不需寫 IP 位址。這種設計提供了高度彈性與可維護性，尤其在 Pod 動態變動、水平擴展或重建時，DNS 會自動解析到正確的服務實例。
+##### 查詢目前叢集的Domain
+```bash
+kubectl describe deployments.apps -n kube-system kube-dns
+查詢輸出:
+    Args:
+      --domain=cluster.local.
+```
+##### 使用說明
+```bash
+<service-name>.<namespace>.svc.cluster.local
+```
 ## [ Cluster IP ] (內部服務使用)
 ![image](https://user-images.githubusercontent.com/39659664/223951242-60974232-ae7b-4b7b-9d4d-3029759f42d8.png)
 ### 說明: 提供集群內部的服務存取入口，僅可由同一個叢集內的服務呼叫。
