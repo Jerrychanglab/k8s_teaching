@@ -78,13 +78,14 @@ spec:
         - containerPort: 80          # 容器開放 Port
         resources:
           requests:
-            cpu: "200m"              # 最少保留 0.2 顆 CPU
-            memory: "128Mi"          # 最少保留 128MiB 記憶體
+            cpu: "100m"              # 最少保留 vCPU
+            memory: "64Mi"          # 最少保留 記憶體
           limits:
             cpu: "1000m"             # 最多使用 1 顆 CPU
             memory: "256Mi"          # 最少保留 256 MiB 記憶體
 ```
-##### 步驟二: 部署HPA Yaml。
+##### 步驟二: 部署HPA
+###### 百分比偵測 Yaml
 ```yaml
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
@@ -110,6 +111,33 @@ spec:
       target:
         type: Utilization
         averageUtilization: 80  # 當 RAM 使用率超過 80% 時會啟動擴展
+```
+###### 絕對值偵測 Yaml
+```yaml
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: nginx-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment           # 目標資源類型，這裡是 Deployment
+    name: nginx-deployment     # 要套用 HPA 的 Deployment 名稱
+  minReplicas: 1               # 最少維持的副本數
+  maxReplicas: 3               # 最多擴展到的副本數
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: AverageValue
+        averageValue: 200m  # 當 vCPU 200m 時會啟動擴展
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: AverageValue
+        averageValue: 128Mi  # 當 RAM 128Mi 時會啟動擴展
 ```
 ## [ Vertical Pod Autoscaler (VPA) ]
 ### 說明: VPA 是 Kubernetes 提供的資源管理元件，能為 Pod 建議或自動調整 requests 和 limits 的值。其用途是「調整單一 Pod 所需資源」，而不是改變 Pod 數量。VPA 搭配 Metrics Server 收集歷史資源使用資料後提出建議，特別適合資源需求不穩定或長時間執行的應用場景。
